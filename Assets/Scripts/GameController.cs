@@ -6,84 +6,79 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private GameObject cube;
+    // Core Variables
+    private GameObject cube;                    // The cube the player is currently on
+    public GameObject allLevels;                // The parent empty GameObject containing all the levels
+    public List<GameObject> levels;             // Ordered list of levels
+    private int level;                          // Current level
+    public TextController textController;       // Manages all text and translations
 
-    public GameObject levels;
-    public GameObject level0;
-    public GameObject level1;
-    public GameObject level2;
-    public GameObject level3;
-    public GameObject level4;
+    // Reset Variables
+    public List<GameObject> resetDisables;      // List of all objects to disable on a reset
+    public List<GameObject> resetEnables;       // List of all objects to enable on a reset
 
-    //Objects to reset
-    public GameObject switch4;
+    // UI Objects
+    public TextMeshProUGUI textLevel;           // UI Level Text Object
+    public TextMeshProUGUI textTimer;           // UI Timer Text Object
 
-    public GameObject doors;
-    public GameObject doorLeft;
-    public GameObject doorRight;
-    public GameObject doorTop;
-    public GameObject doorBottom;
-
-    public TextMeshProUGUI textLevel;
-    public TextMeshProUGUI textTimer;
+    // Timer objects
     public double timer;
     public bool timerOn;
-
     public TextMeshPro textOptionTimer;
-
-    public Material doorMaterial;
-    public Material playerMaterial;
-
-    public bool gameActive;
+    public TextMeshPro textOptionMusic;
+    public TextMeshPro textOptionSounds;
 
     public Camera cam;
     public PlayerController player;
-    public bool camFinishedMove;
-    public int level = 0;
+    public bool camFinishedMove;                // Used for FOV Sliding effect on launch
 
+    // Rotation variables
     public bool isRotating = false;
     public bool rotateQueued = false;
     public string rotateWay;
     public float rotateProgress;
 
+    // Rotation triggering objects
+    public GameObject doors;                    // The parent empty GameObject containing all the doors
+    public GameObject doorLeft;
+    public GameObject doorRight;
+    public GameObject doorTop;
+    public GameObject doorBottom;
+
+    // Level change variables
     public bool isMoving = false;
     public bool moveQueued = false;
     public float moveProgress;
 
-    public Vector3 playerPOS;
-
+    // Audio objects
+    public bool musicOn;
+    public bool soundOn;
     public AudioSource music;
     public AudioSource rotateSound;
     public AudioSource switchSound;
     public AudioSource nextLevelSound;
 
-    private readonly float rotateSpeed = 1.8f; // Has to be a divisible of 90 (1f ,0.9f etc)
-    private readonly float moveSpeed = 0.5f; // Has to be a divisible of 50 (1f ,0.5f etc)
+    // Internal Variables
+    private Vector3 playerPOS;                  // Used for storing data during rotations
+    private readonly float rotateSpeed = 1.8f;  // Has to be a divisible of 90 (1f ,0.9f etc)
+    private readonly float moveSpeed = 0.5f;    // Has to be a divisible of 50 (1f ,0.5f etc)
 
     private void Start()
     {
+        level = 0;
         music.time = 2;
         music.Play();
         SetCubeControl();
-        gameActive = true;
         timerOn = false;
+        musicOn = true;
+        soundOn = true;
+        textController.Init();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!camFinishedMove)
-        {
-            if (cam.fieldOfView <= 70)
-            {
-                cam.fieldOfView += 0.5f;
-            }
-            else
-            {
-                camFinishedMove = true;
-                player.canMove = true;
-            }
-        }
+        
+        
         if (level == 0) 
         {
             textLevel.text = "";
@@ -100,8 +95,19 @@ public class GameController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        if (level != 0 && gameActive && timerOn)
+        if (!camFinishedMove)
+        {
+            if (cam.fieldOfView <= 70)
+            {
+                cam.fieldOfView += 0.1f;
+            }
+            else
+            {
+                camFinishedMove = true;
+                player.canMove = true;
+            }
+        }
+        if (level != 0 && timerOn)
         {
 
             timer += Time.deltaTime;
@@ -110,7 +116,7 @@ public class GameController : MonoBehaviour
         if (moveQueued)
         {
             isMoving = true;
-            levels.transform.Translate(-moveSpeed, 0, 0);
+            allLevels.transform.Translate(-moveSpeed, 0, 0);
             moveProgress += moveSpeed;
 
             if (moveProgress == 50)
@@ -146,7 +152,7 @@ public class GameController : MonoBehaviour
             {
                 cube.transform.RotateAround(cube.transform.position, Vector3.back, rotateSpeed);
                 player.transform.RotateAround(cube.transform.position, Vector3.back, rotateSpeed);
-                rotateProgress = rotateProgress + rotateSpeed;
+                rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
                     rotateQueued = false;                       //Ends rotation
@@ -161,7 +167,7 @@ public class GameController : MonoBehaviour
             {
                 cube.transform.RotateAround(cube.transform.position, Vector3.right, rotateSpeed);
                 player.transform.RotateAround(cube.transform.position, Vector3.right, rotateSpeed);
-                rotateProgress = rotateProgress + rotateSpeed;
+                rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
                     rotateQueued = false;                       //Ends rotation
@@ -176,13 +182,13 @@ public class GameController : MonoBehaviour
             {
                 cube.transform.RotateAround(cube.transform.position, Vector3.left, rotateSpeed);
                 player.transform.RotateAround(cube.transform.position, Vector3.left, rotateSpeed);
-                rotateProgress = rotateProgress + rotateSpeed;
+                rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
                     rotateQueued = false;                       //Ends rotation
                     rotateProgress = 0;                         //Resets counter for next rotation
                     isRotating = false;                         //Sets bool for rotation check
-                    playerPOS.z = -5f;                       //Moves player to new position
+                    playerPOS.z = -5f;                          //Moves player to new position
                     player.transform.position = playerPOS;      //Sets new position to player
                     player.scaleUpRevertQueued = true;
                 }
@@ -191,7 +197,10 @@ public class GameController : MonoBehaviour
     }
     public void Rotate(string way) //Right: Z-, Left, Z+
     {
-        rotateSound.Play();
+        if(soundOn)
+        {
+            rotateSound.Play();
+        }
         rotateWay = way;                                        //Stores the rotation orientation
         rotateQueued = true;                                    //Tells the controller to start a rotation
         playerPOS = player.gameObject.transform.position;       //Stores the player position
@@ -199,7 +208,10 @@ public class GameController : MonoBehaviour
 
     public void NextLevel()
     {
-        nextLevelSound.Play();
+        if(soundOn)
+        {
+            nextLevelSound.Play();
+        }
         moveQueued = true;
         level++;
         SetCubeControl();
@@ -209,21 +221,7 @@ public class GameController : MonoBehaviour
 
     public void SetCubeControl()
     {
-        switch(level)
-        {
-            case 0:
-                cube = level0;
-                break;
-            case 1:
-                cube = level1;
-                break;
-            case 2:
-                cube = level2;
-                break;
-            case 3:
-                cube = level3;
-                break;
-        }
+        cube = levels[level];
     }
 
     public void ResetLevel(int i)
@@ -238,16 +236,66 @@ public class GameController : MonoBehaviour
     {
         if(option == "timer")
         {
-            if(timerOn)
+            if (timerOn)
             {
                 timerOn = false;
-                textOptionTimer.text = "Timer: Off";
+                textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[1];
             }
             else
             {
                 timerOn = true;
-                textOptionTimer.text = "Timer: On";
+                textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[0];
             }
         }
+        if (option == "music")
+        {
+            if (musicOn)
+            {
+                music.Stop();
+                textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[1];
+                musicOn = false;
+            }
+            else
+            {
+                music.time = 2;
+                music.Play();
+                textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[0];
+                musicOn = true;
+            }
+        }
+        if (option == "sounds")
+        {
+            if (soundOn)
+            {
+                textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[1];
+                soundOn = false;
+            }
+            else
+            {
+                textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[0];
+                soundOn = true;
+            }
+        }
+    }
+
+    public void ResetGame()
+    {
+        level = 0;
+        allLevels.transform.position = new Vector3();
+        foreach(GameObject go in levels)
+        {
+            go.transform.rotation = new Quaternion();
+        }
+        foreach (GameObject go in resetDisables)
+        {
+            go.SetActive(false);
+        }
+        foreach (GameObject go in resetEnables)
+        {
+            go.SetActive(true);
+        }
+        SetCubeControl();
+        textController.Init();
+        timer = 0;
     }
 }

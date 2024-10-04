@@ -29,14 +29,11 @@ public class PlayerController : MonoBehaviour
 
     public List<string> achievements;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (canMove)
@@ -54,14 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            body.velocity = moveVelocity*1.5f;
-        }
-        else
-        {
-            body.velocity = moveVelocity;
-        }
+        body.velocity = moveVelocity;
 
         if (scaleUpQueued)
         {
@@ -91,6 +81,7 @@ public class PlayerController : MonoBehaviour
                 scaleProgress = 0;
                 isScaling = false;
                 transform.rotation = new Quaternion();
+                transform.Translate(new Vector3(0f, 0f, 0.005f));
                 canMove = true;
             }
         }
@@ -122,6 +113,7 @@ public class PlayerController : MonoBehaviour
                 scaleProgress = 0;
                 isScaling = false;
                 transform.rotation = new Quaternion();
+                transform.Translate(new Vector3(0f, 0f, -0.005f));
                 canMove = true;
             }
         }
@@ -153,6 +145,7 @@ public class PlayerController : MonoBehaviour
                 scaleProgress = 0;
                 isScaling = false;
                 transform.rotation = new Quaternion();
+                transform.Translate(new Vector3(-0.005f, 0f, 0f));
                 canMove = true;
             }
         }
@@ -184,6 +177,7 @@ public class PlayerController : MonoBehaviour
                 scaleProgress = 0;
                 isScaling = false;
                 transform.rotation = new Quaternion();
+                transform.Translate(new Vector3(0.005f, 0f, 0f));
                 canMove = true;
             }
         }
@@ -220,9 +214,15 @@ public class PlayerController : MonoBehaviour
             canMove = false;
             scaleRightQueued = true;
         }
-        if(collision.gameObject.CompareTag("Trigger") && canMove)
+        if (collision.gameObject.CompareTag("Trigger") && canMove)
         {
             collision.gameObject.GetComponent<TriggerController>().Trigger();
+        }
+
+        if (collision.gameObject.CompareTag("Enemy") && canMove)
+        {
+            this.transform.position = new Vector3(0, 5, 0);
+            gameController.ResetGame();
         }
     }
 

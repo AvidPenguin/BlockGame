@@ -11,7 +11,7 @@ public class TriggerController : MonoBehaviour
     public bool hide;
     public GameObject hideTarget;
     public bool retext;
-    public string text;
+    public int textId;
     public TextMeshPro retextTarget;
     public bool achievement;
     public string achievementTitle;
@@ -43,7 +43,8 @@ public class TriggerController : MonoBehaviour
     {
         if (retext)
         {
-            retextTarget.text = text;
+            TextController tc = FindAnyObjectByType<TextController>();
+            retextTarget.text = tc.retextsEnglish[textId];
         }
         if (show)
         {
@@ -76,7 +77,10 @@ public class TriggerController : MonoBehaviour
         if(playSound)
         {
             GameController gc = FindAnyObjectByType<GameController>();
-            gc.switchSound.Play();
+            if(gc.soundOn)
+            {
+                gc.switchSound.Play();
+            }
         }
         if (!keep)
         {
