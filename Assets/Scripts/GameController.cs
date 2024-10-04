@@ -72,13 +72,19 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cam.fieldOfView = Mathf.SmoothStep(cam.fieldOfView, 70, 0.08f);
-        if (cam.fieldOfView > 30f && !camFinishedMove)
+        if (!camFinishedMove)
         {
-            player.canMove = true;
-            camFinishedMove = true;
+            if (cam.fieldOfView <= 70)
+            {
+                cam.fieldOfView += 0.5f;
+            }
+            else
+            {
+                camFinishedMove = true;
+                player.canMove = true;
+            }
         }
-        if(level == 0) 
+        if (level == 0) 
         {
             textLevel.text = "";
         }
@@ -94,7 +100,8 @@ public class GameController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(level != 0 && gameActive && timerOn)
+        
+        if (level != 0 && gameActive && timerOn)
         {
 
             timer += Time.deltaTime;
