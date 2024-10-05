@@ -23,7 +23,7 @@ public class TextController : MonoBehaviour
     };
 
     public readonly string[] optionsEnglish = {
-        "Timer", "Music", "Sounds"
+        "Timer", "Music", "Sounds","Hardcore"
     };
 
     public readonly string[] onoffEnglish = {

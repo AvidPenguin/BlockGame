@@ -21,13 +21,16 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI textLevel;           // UI Level Text Object
     public TextMeshProUGUI textTimer;           // UI Timer Text Object
 
-    // Timer objects
+    // Option objects and variables
     public double timer;
     public bool timerOn;
+    public bool isHardcore;
     public TextMeshPro textOptionTimer;
     public TextMeshPro textOptionMusic;
     public TextMeshPro textOptionSounds;
+    public TextMeshPro textOptionHardcore;
 
+    //Camera variables
     public Camera cam;
     public PlayerController player;
     public bool camFinishedMove;                // Used for FOV Sliding effect on launch
@@ -67,18 +70,18 @@ public class GameController : MonoBehaviour
     {
         level = 0;
         music.time = 2;
-        music.Play();
-        SetCubeControl();
         timerOn = false;
         musicOn = true;
         soundOn = true;
+        isHardcore = false;
+
+        music.Play();
         textController.Init();
+        SetCubeControl();
     }
 
     void Update()
     {
-        
-        
         if (level == 0) 
         {
             textLevel.text = "";
@@ -224,12 +227,19 @@ public class GameController : MonoBehaviour
         cube = levels[level];
     }
 
-    public void ResetLevel(int i)
+    public void ResetLevel()
     {
-        if (i == 4)
+        cube.transform.rotation = new Quaternion();
+        foreach (GameObject go in resetDisables)
         {
-
+            go.SetActive(false);
         }
+        foreach (GameObject go in resetEnables)
+        {
+            go.SetActive(true);
+        }
+        textController.Init();
+
     }
 
     public void OptionChange(string option)
@@ -274,6 +284,19 @@ public class GameController : MonoBehaviour
             {
                 textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[0];
                 soundOn = true;
+            }
+        }
+        if (option == "hardcore")
+        {
+            if (isHardcore)
+            {
+                textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[1];
+                isHardcore = false;
+            }
+            else
+            {
+                textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[0];
+                isHardcore = true;
             }
         }
     }

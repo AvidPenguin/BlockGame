@@ -221,8 +221,15 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy") && canMove)
         {
+            if(gameController.isHardcore)
+            {
+                gameController.ResetGame();
+            }
+            else
+            {
+                gameController.ResetLevel();
+            }
             this.transform.position = new Vector3(0, 5, 0);
-            gameController.ResetGame();
         }
     }
 
