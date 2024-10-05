@@ -7,12 +7,14 @@ using static UnityEngine.GraphicsBuffer;
 public class TriggerController : MonoBehaviour
 {
     public bool show;
-    public GameObject showTarget;
+    public List<GameObject> showTargets;
     public bool hide;
-    public GameObject hideTarget;
+    public List<GameObject> hideTargets;
+    public bool rotate;
+    public List<GameObject> rotateTargets;
     public bool retext;
-    public int textId;
-    public TextMeshPro retextTarget;
+    public List<int> textIds;
+    public List<TextMeshPro> retextTargets;
     public bool achievement;
     public string achievementTitle;
     public bool keep;
@@ -44,15 +46,33 @@ public class TriggerController : MonoBehaviour
         if (retext)
         {
             TextController tc = FindAnyObjectByType<TextController>();
-            retextTarget.text = tc.retextsEnglish[textId];
+            int i = 0;
+            foreach(TextMeshPro tmp in retextTargets)
+            {
+                tmp.text = tc.retextsEnglish[textIds[i]];
+                i++;
+            }
         }
         if (show)
         {
-            showTarget.SetActive(true);
+            foreach(GameObject go in showTargets)
+            {
+                go.SetActive(true);
+            }
         }
         if (hide)
         {
-            hideTarget.SetActive(false);
+            foreach (GameObject go in hideTargets)
+            {
+                go.SetActive(false);
+            }
+        }
+        if (rotate)
+        {
+            foreach (GameObject go in rotateTargets)
+            {
+                go.transform.RotateAround(go.transform.position, Vector3.up, 90);
+            }
         }
         if (achievement)
         {

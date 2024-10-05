@@ -16,10 +16,11 @@ public class GameController : MonoBehaviour
     // Reset Variables
     public List<GameObject> resetDisables;      // List of all objects to disable on a reset
     public List<GameObject> resetEnables;       // List of all objects to enable on a reset
+    public List<GameObject> resetRotates;       // List of all objects to rotate on a reset
 
     // UI Objects
-    public TextMeshProUGUI textLevel;           // UI Level Text Object
-    public TextMeshProUGUI textTimer;           // UI Timer Text Object
+    public TextMeshPro textLevel;           // UI Level Text Object
+    public TextMeshPro textTimer;           // UI Timer Text Object
 
     // Option objects and variables
     public double timer;
@@ -238,6 +239,10 @@ public class GameController : MonoBehaviour
         {
             go.SetActive(true);
         }
+        foreach (GameObject go in resetRotates)
+        {
+            go.transform.rotation = new Quaternion();
+        }
         textController.Init();
 
     }
@@ -291,11 +296,15 @@ public class GameController : MonoBehaviour
             if (isHardcore)
             {
                 textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[1];
+                textTimer.color = Color.white;
+                textLevel.color = Color.white;
                 isHardcore = false;
             }
             else
             {
                 textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[0];
+                textTimer.color = Color.red;
+                textLevel.color = Color.red;
                 isHardcore = true;
             }
         }
@@ -316,6 +325,10 @@ public class GameController : MonoBehaviour
         foreach (GameObject go in resetEnables)
         {
             go.SetActive(true);
+        }
+        foreach (GameObject go in resetRotates)
+        {
+            go.transform.rotation = new Quaternion();
         }
         SetCubeControl();
         textController.Init();
