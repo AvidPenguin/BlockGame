@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
     public Rigidbody body;
     public bool canMove;
 
-    private Vector3 moveInput;
-    private Vector3 moveVelocity;
+    public float axisX;
+    public float axisZ;
+
     public GameController gameController;
     public Collider col;
 
@@ -36,22 +37,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
-        {
-            moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-            moveVelocity = moveInput * moveSpeed;
-            
-        }
-        else
-        {
-            moveVelocity = Vector3.zero;
-        }
-        
+        axisX = Input.GetAxisRaw("Horizontal");
+        axisZ = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
     {
-        body.velocity = moveVelocity;
+        body.velocity = new Vector3(axisX, 0f, axisZ) * moveSpeed;
 
         if (scaleUpQueued)
         {
@@ -185,8 +177,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if(collision.gameObject.CompareTag("Teleporter"))
+        if (collision.gameObject.CompareTag("Teleporter"))
         {
             gameController.NextLevel();
         }
@@ -194,43 +185,52 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("DoorTop") && canMove)
-        {
-            canMove = false;
-            scaleUpQueued = true;
-        }
-        if (collision.gameObject.CompareTag("DoorBottom") && canMove)
-        {
-            canMove = false;
-            scaleDownQueued = true;
-        }
-        if (collision.gameObject.CompareTag("DoorLeft") && canMove)
-        {
-            canMove = false;
-            scaleLeftQueued = true;
-        }
-        if (collision.gameObject.CompareTag("DoorRight") && canMove)
-        {
-            canMove = false;
-            scaleRightQueued = true;
-        }
-        if (collision.gameObject.CompareTag("Trigger") && canMove)
-        {
-            collision.gameObject.GetComponent<TriggerController>().Trigger();
-        }
 
-        if (collision.gameObject.CompareTag("Enemy") && canMove)
+        if(canMove)
         {
-            if(gameController.isHardcore)
+            if (collision.gameObject.CompareTag("DoorTop"))
             {
-                gameController.ResetGame();
+                canMove = false;
+                scaleUpQueued = true;
             }
-            else
+            if (collision.gameObject.CompareTag("DoorBottom"))
             {
-                gameController.ResetLevel();
+                canMove = false;
+                scaleDownQueued = true;
             }
-            this.transform.position = new Vector3(0, 5, 0);
+            if (collision.gameObject.CompareTag("DoorLeft"))
+            {
+                canMove = false;
+                scaleLeftQueued = true;
+            }
+            if (collision.gameObject.CompareTag("DoorRight"))
+            {
+                canMove = false;
+                scaleRightQueued = true;
+            }
+            if (collision.gameObject.CompareTag("Trigger"))
+            {
+                collision.gameObject.GetComponent<TriggerController>().Trigger();
+            }
+
+            if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet"))
+            {
+                if (gameController.isHardcore)
+                {
+                    gameController.ResetGame();
+                }
+                else
+                {
+                    gameController.ResetLevel();
+                }
+                if(collision.gameObject.CompareTag("Bullet"))
+                {
+                    Destroy(collision.gameObject);
+                }
+                this.transform.position = new Vector3(0, 5.125f, 0);
+            }
         }
+        
     }
 
 

@@ -128,7 +128,7 @@ public class GameController : MonoBehaviour
                 moveQueued = false;
                 moveProgress = 0;
                 isMoving = false;
-                player.transform.position = new Vector3(0, 5, 0);      //Sets new position to player
+                player.transform.position = new Vector3(0, 5.125f, 0);      //Sets new position to player
                 player.gameObject.SetActive(true);          //Reinstates the player to view
             }
         }
@@ -212,14 +212,22 @@ public class GameController : MonoBehaviour
 
     public void NextLevel()
     {
-        if(soundOn)
+        if (level<levels.Count-1)
         {
-            nextLevelSound.Play();
+            if (soundOn)
+            {
+                nextLevelSound.Play();
+            }
+            moveQueued = true;
+            level++;
+            SetCubeControl();
+            player.gameObject.SetActive(false);                     //Removes the player from view
         }
-        moveQueued = true;
-        level++;
-        SetCubeControl();
-        player.gameObject.SetActive(false);                     //Removes the player from view
+        else
+        {
+            //No more levels
+        }
+        
 
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5901476497328678438}
   - component: {fileID: 8375049849189590422}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: SwitchMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 49680841a5e215d4580e784eac1ce7de, type: 2}
+  - {fileID: 2100000, guid: 706902136550c164e86b476685cb0ccc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,12 +203,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   show: 0
-  showTarget: {fileID: 0}
-  hide: 1
-  hideTarget: {fileID: 0}
+  showTargets: []
+  hide: 0
+  hideTargets: []
+  rotate: 0
+  rotateTargets: []
   retext: 0
-  text: 
-  retextTarget: {fileID: 0}
+  textIds: 
+  retextTargets: []
   achievement: 0
   achievementTitle: 
   keep: 0
