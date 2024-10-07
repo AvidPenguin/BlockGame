@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameController : MonoBehaviour
 {
+
     // Core Variables
     private GameObject cube;                    // The cube the player is currently on
     public GameObject allLevels;                // The parent empty GameObject containing all the levels
@@ -52,6 +54,7 @@ public class GameController : MonoBehaviour
     // Level change variables
     public bool isMoving = false;
     public bool moveQueued = false;
+    public int movesToDo = 1;
     public float moveProgress;
 
     // Audio objects
@@ -79,6 +82,8 @@ public class GameController : MonoBehaviour
         music.Play();
         textController.Init();
         SetCubeControl();
+        LoadGame();
+        OptionUpdateTexts();
     }
 
     void Update()
@@ -87,7 +92,7 @@ public class GameController : MonoBehaviour
         {
             textLevel.text = "";
         }
-        else
+        else //Add language options
         {
             textLevel.text = "Level " + level.ToString();
             if(timerOn)
@@ -123,13 +128,14 @@ public class GameController : MonoBehaviour
             allLevels.transform.Translate(-moveSpeed, 0, 0);
             moveProgress += moveSpeed;
 
-            if (moveProgress == 50)
+            if (moveProgress == (50*movesToDo))
             {
                 moveQueued = false;
                 moveProgress = 0;
                 isMoving = false;
                 player.transform.position = new Vector3(0, 5.125f, 0);      //Sets new position to player
                 player.gameObject.SetActive(true);          //Reinstates the player to view
+                movesToDo = 1;
             }
         }
 
@@ -197,6 +203,30 @@ public class GameController : MonoBehaviour
                     player.scaleUpRevertQueued = true;
                 }
             }
+            if (rotateWay == "clockwise")
+            {
+                cube.transform.RotateAround(cube.transform.position, Vector3.up, rotateSpeed);
+                player.transform.RotateAround(cube.transform.position, Vector3.up, rotateSpeed);
+                rotateProgress += rotateSpeed;
+                if (rotateProgress >= 90)
+                {
+                    rotateQueued = false;                       //Ends rotation
+                    rotateProgress = 0;                         //Resets counter for next rotation
+                    isRotating = false;                         //Sets bool for rotation check
+                }
+            }
+            if (rotateWay == "counterclockwise")
+            {
+                cube.transform.RotateAround(cube.transform.position, Vector3.down, rotateSpeed);
+                player.transform.RotateAround(cube.transform.position, Vector3.down, rotateSpeed);
+                rotateProgress += rotateSpeed;
+                if (rotateProgress >= 90)
+                {
+                    rotateQueued = false;                       //Ends rotation
+                    rotateProgress = 0;                         //Resets counter for next rotation
+                    isRotating = false;                         //Sets bool for rotation check
+                }
+            }
         }
     }
     public void Rotate(string way) //Right: Z-, Left, Z+
@@ -259,62 +289,65 @@ public class GameController : MonoBehaviour
     {
         if(option == "timer")
         {
-            if (timerOn)
-            {
-                timerOn = false;
-                textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[1];
-            }
-            else
-            {
-                timerOn = true;
-                textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[0];
-            }
+            timerOn = !timerOn;
         }
         if (option == "music")
         {
-            if (musicOn)
-            {
-                music.Stop();
-                textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[1];
-                musicOn = false;
-            }
-            else
-            {
-                music.time = 2;
-                music.Play();
-                textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[0];
-                musicOn = true;
-            }
+            musicOn = !musicOn;
         }
         if (option == "sounds")
         {
-            if (soundOn)
-            {
-                textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[1];
-                soundOn = false;
-            }
-            else
-            {
-                textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[0];
-                soundOn = true;
-            }
+            soundOn = !soundOn;
         }
         if (option == "hardcore")
         {
-            if (isHardcore)
-            {
-                textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[1];
-                textTimer.color = Color.white;
-                textLevel.color = Color.white;
-                isHardcore = false;
-            }
-            else
-            {
-                textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[0];
-                textTimer.color = Color.red;
-                textLevel.color = Color.red;
-                isHardcore = true;
-            }
+            isHardcore = !isHardcore;
+        }
+
+        OptionUpdateTexts();
+        SaveGame();
+    }
+
+    public void OptionUpdateTexts()
+    {
+        if (!isHardcore)
+        {
+            textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[1];
+            textTimer.color = Color.white;
+            textLevel.color = Color.white;
+        }
+        else
+        {
+            textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[0];
+            textTimer.color = Color.red;
+            textLevel.color = Color.red;
+        }
+        if (!soundOn)
+        {
+            textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[1];
+        }
+        else
+        {
+            textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[0];
+        }
+        if (!musicOn)
+        {
+            music.Stop();
+            textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[1];
+        }
+        else
+        {
+            music.time = 2;
+            music.Play();
+            textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[0];
+        }
+        if (!timerOn)
+        {
+            textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[1];
+        }
+        else
+        {
+            textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[0];
         }
     }
 
@@ -341,5 +374,135 @@ public class GameController : MonoBehaviour
         SetCubeControl();
         textController.Init();
         timer = 0;
+    }
+
+    public void SaveGame()
+    {
+        if (timerOn)
+        {
+            PlayerPrefs.SetInt("timer", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("timer", 0);
+        }
+        if (musicOn)
+        {
+            PlayerPrefs.SetInt("music", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("music", 0);
+        }
+        if (soundOn)
+        {
+            PlayerPrefs.SetInt("sounds", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("sounds", 0);
+        }
+        if (isHardcore)
+        {
+            PlayerPrefs.SetInt("hardcore", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("hardcore", 0);
+        }
+    }
+    public void LoadGame()
+    {
+        if (PlayerPrefs.HasKey("timer"))
+        {
+            if (PlayerPrefs.GetInt("timer") == 1)
+            {
+                timerOn = true;
+            }
+            else
+            {
+                timerOn = false;
+            }
+        }
+        else
+        {
+            if (timerOn)
+            {
+                PlayerPrefs.SetInt("timer", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("timer", 0);
+            }
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("music"))
+        {
+            if (PlayerPrefs.GetInt("music") == 1)
+            {
+                musicOn = true;
+            }
+            else
+            {
+                musicOn = false;
+            }
+        }
+        else
+        {
+            if (musicOn)
+            {
+                PlayerPrefs.SetInt("music", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("music", 0);
+            }
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("sounds"))
+        {
+            if (PlayerPrefs.GetInt("sounds") == 1)
+            {
+                soundOn = true;
+            }
+            else
+            {
+                soundOn = false;
+            }
+        }
+        else
+        {
+            if (soundOn)
+            {
+                PlayerPrefs.SetInt("sounds", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("sounds", 0);
+            }
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("hardcore"))
+        {
+            if (PlayerPrefs.GetInt("hardcore") == 1)
+            {
+                isHardcore = true;
+            }
+            else
+            {
+                isHardcore = false;
+            }
+        }
+        else
+        {
+            if (isHardcore)
+            {
+                PlayerPrefs.SetInt("hardcore", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("hardcore", 0);
+            }
+        }
     }
 }

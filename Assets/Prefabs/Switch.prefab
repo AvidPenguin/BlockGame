@@ -135,3 +135,5 @@ MonoBehaviour:
   quit: 0
   rotationbased: 0
   playSound: 1
+  rotateCube: 0
+  rotateWay: 

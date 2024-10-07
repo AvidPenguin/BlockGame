@@ -23,6 +23,8 @@ public class TriggerController : MonoBehaviour
     public bool quit;
     public bool rotationbased;
     public bool playSound;
+    public bool rotateCube;
+    public string rotateWay;
 
 
     // Start is called before the first frame update
@@ -105,6 +107,12 @@ public class TriggerController : MonoBehaviour
         if (!keep)
         {
             gameObject.SetActive(false);
+        }
+        if(rotateCube)
+        {
+            GameController gc = FindAnyObjectByType<GameController>();
+            gc.rotateQueued = true;
+            gc.rotateWay = rotateWay;
         }
     }
 }

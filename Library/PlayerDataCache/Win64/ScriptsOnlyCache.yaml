@@ -1,8 +1,11 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - EnemyController
     - GameController
     - PlayerController
+    - TeleporterController
+    - TextController
     - TriggerController
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
@@ -18,16 +21,10 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshPro
-    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
-    UnityEngine.UI.dll:
-    - UnityEngine.EventSystems.EventSystem
-    - UnityEngine.EventSystems.StandaloneInputModule
-    - UnityEngine.UI.CanvasScaler
-    - UnityEngine.UI.GraphicRaycaster
   serializedClasses:
     Unity.TextMeshPro:
     - TMPro.FaceInfo_Legacy
@@ -84,6 +81,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 104
@@ -91,33 +92,29 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 2186}
+      Script: {instanceID: 2188}
     - Class: 114
-      Script: {instanceID: 2606}
+      Script: {instanceID: 3526}
     - Class: 114
-      Script: {instanceID: 2810}
+      Script: {instanceID: 3870}
     - Class: 114
-      Script: {instanceID: 3524}
+      Script: {instanceID: 3976}
     - Class: 114
-      Script: {instanceID: 3972}
+      Script: {instanceID: 4082}
     - Class: 114
-      Script: {instanceID: 4078}
+      Script: {instanceID: 4334}
     - Class: 114
-      Script: {instanceID: 4330}
+      Script: {instanceID: 4944}
     - Class: 114
-      Script: {instanceID: 4940}
+      Script: {instanceID: 4988}
     - Class: 114
-      Script: {instanceID: 5038}
+      Script: {instanceID: 5044}
     - Class: 114
-      Script: {instanceID: 5588}
+      Script: {instanceID: 5236}
     - Class: 114
-      Script: {instanceID: 5614}
+      Script: {instanceID: 5622}
     - Class: 114
-      Script: {instanceID: 5742}
-    - Class: 114
-      Script: {instanceID: 6058}
-    - Class: 114
-      Script: {instanceID: 6654}
+      Script: {instanceID: 6662}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -127,10 +124,6 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 223
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
@@ -527,6 +520,12 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
+      Hash: e62311c8cba418858de7dead161efcc9
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: TeleporterController
+  - hash:
+      serializedVersion: 2
       Hash: 4718916586b3818eb69bf65df61f0f3a
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -725,7 +724,7 @@ ScriptsOnlyBuild:
     className: Toggle
   - hash:
       serializedVersion: 2
-      Hash: c222a4863777e0682cb991229428cecd
+      Hash: 07ec95fcf39ee5fe7b9ead0cac2c0bb8
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: GameController
@@ -747,6 +746,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: HorizontalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: c7516291085dabde6ba4a7df6e5d84bf
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: TextController
   - hash:
       serializedVersion: 2
       Hash: 191cd500c627cd6682ef6f70b8e47f2c
@@ -791,6 +796,12 @@ ScriptsOnlyBuild:
     className: PanelEventHandler
   - hash:
       serializedVersion: 2
+      Hash: b60f84bea829e468ffa5e46bba913845
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: EnemyController
+  - hash:
+      serializedVersion: 2
       Hash: 9dd54ce33440072d6692a67e0c384ad1
     assemblyName: Unity.Timeline
     namespaceName: UnityEngine.Timeline
@@ -833,7 +844,7 @@ ScriptsOnlyBuild:
     className: TextMeshSpawner
   - hash:
       serializedVersion: 2
-      Hash: 617c1bf2c14fcd858b04ef206694fb15
+      Hash: 68d4ec19506e6f014a96637693efb3d3
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: PlayerController
@@ -989,7 +1000,7 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
-      Hash: a099990cbcc0695246e159379366a5ce
+      Hash: 11658099a34ebf7592d1ff1bb220de8c
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: TriggerController
@@ -1182,4 +1193,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/Dan/BlockGame/Builds/Build 2/BlockGame.exe
+  playerPath: C:/Users/Dan/BlockGame/Builds/Build 4 - Demo/Cubico.exe

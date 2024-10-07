@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -175,11 +176,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Teleporter"))
+        if (collision.gameObject.CompareTag("TeleporterLocal"))
         {
-            gameController.NextLevel();
+            collision.gameObject.GetComponent<TeleporterController>().enabled = true;
         }
     }
 
@@ -188,6 +189,21 @@ public class PlayerController : MonoBehaviour
 
         if(canMove)
         {
+            if (collision.gameObject.CompareTag("TeleporterLocal"))
+            {
+                if(collision.gameObject.GetComponent<TeleporterController>().enabled)
+                {
+                    float x = collision.gameObject.GetComponent<TeleporterController>().partner.transform.position.x;
+                    float z = collision.gameObject.GetComponent<TeleporterController>().partner.transform.position.z;
+                    collision.gameObject.GetComponent<TeleporterController>().partner.GetComponent<TeleporterController>().enabled = false;
+
+                    transform.position = new Vector3(x, transform.position.y, z);
+                }
+            }
+            if (collision.gameObject.CompareTag("Teleporter"))
+            {
+                gameController.NextLevel();
+            }
             if (collision.gameObject.CompareTag("DoorTop"))
             {
                 canMove = false;

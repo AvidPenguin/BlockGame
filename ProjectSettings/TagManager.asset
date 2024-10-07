@@ -14,6 +14,7 @@ TagManager:
   - Wall
   - Turret
   - Bullet
+  - TeleporterLocal
   layers:
   - Default
   - TransparentFX

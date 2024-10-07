@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -14,6 +13,12 @@ public class EnemyController : MonoBehaviour
     public float moveDistance;
     public bool moveLR;
     public bool moveUD;
+
+    public bool scalingEnemy;
+    public float scaleSpeed;
+    public bool scaleBack;
+    public float scaleProgress;
+    public float scaleDistance;
 
 
 
@@ -56,6 +61,28 @@ public class EnemyController : MonoBehaviour
             {
                 moveBack = !moveBack;
                 moveProgress = 0;
+            }
+        }
+        if (scalingEnemy)
+        {
+            float x = transform.localScale.x;
+            float y = transform.localScale.y;
+            float z = transform.localScale.z;
+            if (!scaleBack)
+            {
+                transform.localScale = new Vector3(x + scaleSpeed, y, z + scaleSpeed);
+            }
+            else
+            {
+                transform.localScale = new Vector3(x - scaleSpeed, y, z - scaleSpeed);
+            }
+
+            scaleProgress += scaleSpeed;
+
+            if (scaleProgress > scaleDistance)
+            {
+                scaleBack = !scaleBack;
+                scaleProgress = 0;
             }
         }
     }
