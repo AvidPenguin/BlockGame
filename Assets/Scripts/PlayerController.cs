@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("TeleporterLocal"))
         {
-            collision.gameObject.GetComponent<TeleporterController>().enabled = true;
+            collision.gameObject.GetComponent<TeleporterController>().enabled = true;               // Resets teleporter upon leaving to prevent being stuck in a loop
         }
     }
 
@@ -193,11 +193,10 @@ public class PlayerController : MonoBehaviour
             {
                 if(collision.gameObject.GetComponent<TeleporterController>().enabled)
                 {
-                    float x = collision.gameObject.GetComponent<TeleporterController>().partner.transform.position.x;
-                    float z = collision.gameObject.GetComponent<TeleporterController>().partner.transform.position.z;
+                    Vector3 xyz = collision.gameObject.GetComponent<TeleporterController>().partner.transform.position;
                     collision.gameObject.GetComponent<TeleporterController>().partner.GetComponent<TeleporterController>().enabled = false;
 
-                    transform.position = new Vector3(x, transform.position.y, z);
+                    transform.position = new Vector3(xyz.x, transform.position.y, xyz.z);
                 }
             }
             if (collision.gameObject.CompareTag("Teleporter"))
@@ -231,9 +230,10 @@ public class PlayerController : MonoBehaviour
 
             if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet"))
             {
+                // TODO: Add death animation
                 if (gameController.isHardcore)
                 {
-                    gameController.ResetGame();
+                    gameController.ResetLevels();
                 }
                 else
                 {

@@ -27,7 +27,6 @@ public class TriggerController : MonoBehaviour
     public string rotateWay;
 
 
-    // Start is called before the first frame update
     public void Trigger()
     {
         if (rotationbased)
@@ -51,7 +50,7 @@ public class TriggerController : MonoBehaviour
             int i = 0;
             foreach(TextMeshPro tmp in retextTargets)
             {
-                tmp.text = tc.retextsEnglish[textIds[i]];
+                //tmp.text = tc.retextsEnglish[textIds[i]];
                 i++;
             }
         }
@@ -110,11 +109,11 @@ public class TriggerController : MonoBehaviour
         }
         if(rotateCube)
         {
-            GameController gc = FindAnyObjectByType<GameController>();
-            if(!gc.rotateQueued)
+            RotationController rc = FindAnyObjectByType<RotationController>();
+            if(!rc.rotateQueued)
             {
-                gc.rotateQueued = true;
-                gc.rotateWay = rotateWay;
+                rc.rotateQueued = true;
+                rc.rotateDirection = rotateWay;
             }
         }
     }

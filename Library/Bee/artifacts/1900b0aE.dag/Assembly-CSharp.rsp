@@ -356,6 +356,7 @@
 "Assets/Scripts/EnemyController.cs"
 "Assets/Scripts/GameController.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/RotationController.cs"
 "Assets/Scripts/TeleporterController.cs"
 "Assets/Scripts/TextController.cs"
 "Assets/Scripts/TriggerController.cs"
