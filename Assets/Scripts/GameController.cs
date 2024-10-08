@@ -156,6 +156,7 @@ public class GameController : MonoBehaviour
                     playerPOS.x = -5f;                       //Moves player to new position
                     player.transform.position = playerPOS;      //Sets new position to player
                     player.scaleRightRevertQueued = true;
+                    rotateWay = "";
                 }
             }
             if (rotateWay == "left")
@@ -171,6 +172,7 @@ public class GameController : MonoBehaviour
                     playerPOS.x = 5f;                       //Moves player to new position
                     player.transform.position = playerPOS;      //Sets new position to player
                     player.scaleLeftRevertQueued = true;
+                    rotateWay = "";
                 }
             }
             if (rotateWay == "down")
@@ -186,6 +188,7 @@ public class GameController : MonoBehaviour
                     playerPOS.z = 5f;                       //Moves player to new position
                     player.transform.position = playerPOS;      //Sets new position to player
                     player.scaleDownRevertQueued = true;
+                    rotateWay = "";
                 }
             }
             if (rotateWay == "up")
@@ -201,10 +204,12 @@ public class GameController : MonoBehaviour
                     playerPOS.z = -5f;                          //Moves player to new position
                     player.transform.position = playerPOS;      //Sets new position to player
                     player.scaleUpRevertQueued = true;
+                    rotateWay = "";
                 }
             }
             if (rotateWay == "clockwise")
             {
+                doors.SetActive(false);
                 cube.transform.RotateAround(cube.transform.position, Vector3.up, rotateSpeed);
                 player.transform.RotateAround(cube.transform.position, Vector3.up, rotateSpeed);
                 rotateProgress += rotateSpeed;
@@ -212,11 +217,13 @@ public class GameController : MonoBehaviour
                 {
                     rotateQueued = false;                       //Ends rotation
                     rotateProgress = 0;                         //Resets counter for next rotation
-                    isRotating = false;                         //Sets bool for rotation check
+                    isRotating = false;
+                    doors.SetActive(true);
                 }
             }
             if (rotateWay == "counterclockwise")
             {
+                doors.SetActive(false);
                 cube.transform.RotateAround(cube.transform.position, Vector3.down, rotateSpeed);
                 player.transform.RotateAround(cube.transform.position, Vector3.down, rotateSpeed);
                 rotateProgress += rotateSpeed;
@@ -224,7 +231,8 @@ public class GameController : MonoBehaviour
                 {
                     rotateQueued = false;                       //Ends rotation
                     rotateProgress = 0;                         //Resets counter for next rotation
-                    isRotating = false;                         //Sets bool for rotation check
+                    isRotating = false;
+                    doors.SetActive(true);
                 }
             }
         }

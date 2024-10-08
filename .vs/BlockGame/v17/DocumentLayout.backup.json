@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Dan\\BlockGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\textcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|c:\\users\\dan\\blockgame\\assets\\scripts\\textcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\textcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|c:\\users\\dan\\blockgame\\assets\\scripts\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\triggercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\triggercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,11 +19,11 @@
       "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\triggercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\triggercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|c:\\users\\dan\\blockgame\\assets\\scripts\\teleportercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\teleportercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\teleportercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -38,21 +38,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TeleporterController.cs",
-              "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TeleporterController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\TeleporterController.cs",
-              "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TeleporterController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\TeleporterController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-06T08:53:20.761Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 6,
@@ -67,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "EnemyController.cs",
               "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\EnemyController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyController.cs",
@@ -75,8 +62,7 @@
               "RelativeToolTip": "Assets\\Scripts\\EnemyController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-06T04:22:33.777Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-06T04:22:33.777Z"
             },
             {
               "$type": "Document",
@@ -86,10 +72,35 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\TextController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TextController.cs",
               "RelativeToolTip": "Assets\\Scripts\\TextController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCgAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-04T22:39:31.429Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TriggerController.cs",
+              "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TriggerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\TriggerController.cs",
+              "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TriggerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\TriggerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-04T00:39:20.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TeleporterController.cs",
+              "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TeleporterController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\TeleporterController.cs",
+              "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TeleporterController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\TeleporterController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-06T08:53:20.761Z"
             },
             {
               "$type": "Document",
@@ -99,22 +110,9 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
-              "ViewState": "AgIAAKIAAAAAAAAAAAAwwLcAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAwwFwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T05:53:06.693Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TriggerController.cs",
-              "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TriggerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\TriggerController.cs",
-              "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TriggerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\TriggerController.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAowDMAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-04T00:39:20.123Z",
               "EditorCaption": ""
             },
             {
@@ -125,7 +123,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\GameController.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAAwFsAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAL4AAAAAAAAAAAAmwOIAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T06:02:39.93Z",
               "EditorCaption": ""

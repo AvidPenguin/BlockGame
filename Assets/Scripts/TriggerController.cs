@@ -73,7 +73,7 @@ public class TriggerController : MonoBehaviour
         {
             foreach (GameObject go in rotateTargets)
             {
-                go.transform.RotateAround(go.transform.position, Vector3.up, 90);
+                go.transform.Rotate(Vector3.up, 90);
             }
         }
         if (achievement)
@@ -111,8 +111,11 @@ public class TriggerController : MonoBehaviour
         if(rotateCube)
         {
             GameController gc = FindAnyObjectByType<GameController>();
-            gc.rotateQueued = true;
-            gc.rotateWay = rotateWay;
+            if(!gc.rotateQueued)
+            {
+                gc.rotateQueued = true;
+                gc.rotateWay = rotateWay;
+            }
         }
     }
 }
