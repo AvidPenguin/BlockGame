@@ -44,16 +44,6 @@ public class TriggerController : MonoBehaviour
 
     void Action()
     {
-        if (retext)
-        {
-            TextController tc = FindAnyObjectByType<TextController>();
-            int i = 0;
-            foreach(TextMeshPro tmp in retextTargets)
-            {
-                //tmp.text = tc.retextsEnglish[textIds[i]];
-                i++;
-            }
-        }
         if (show)
         {
             foreach(GameObject go in showTargets)

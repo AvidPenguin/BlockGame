@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringTable_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 38c8da902a540cc4b96f4202fe80f112, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3552677634048
+    m_Localized: Jouer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1
+    m_Localized: "Possibilit\xE9s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2
+    m_Localized: "Cr\xE9dits"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3
+    m_Localized: Quitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4
+    m_Localized: Un jeu par
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5
+    m_Localized: Conception de niveau
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6
+    m_Localized: Programmation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7
+    m_Localized: Musique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8
+    m_Localized: Essai
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9
+    m_Localized: Traductions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10
+    m_Localized: "Es-tu s\xFBr?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11
+    m_Localized: "Le but est d'atteindre le t\xE9l\xE9porteur vert pour avancer vers
+      le cube suivant"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12
+    m_Localized: "C'est aussi simple que \xE7a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13
+    m_Localized: En fait, ce n'est pas toujours aussi simple
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14
+    m_Localized: "Cela rendrait le jeu un peu ennuyeux, non\_?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15
+    m_Localized: "Est-ce la bonne fa\xE7on ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16
+    m_Localized: "\xC7a y ressemble certainement"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17
+    m_Localized: Section de gameplay passionnante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18
+    m_Localized: Non
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19
+    m_Localized: "C'est une porte verrouill\xE9e"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20
+    m_Localized: "Il doit y avoir un moyen de le d\xE9bloquer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21
+    m_Localized: C'est mon interrupteur et je l'adore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22
+    m_Localized: "Mais je n'ai aucune id\xE9e de ce que \xE7a fait"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23
+    m_Localized: "Oh, tu es du genre \xE0 explorer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24
+    m_Localized: "Ce commutateur est bas\xE9 sur l'orientation"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25
+    m_Localized: "Essayez de placer la fl\xE8che vers le haut"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26
+    m_Localized: Essayez de ne pas penser en deux dimensions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27
+    m_Localized: "Apr\xE8s tout, un cube est un objet tridimensionnel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28
+    m_Localized: "Si ce n'est pas \xE9vident, rouge = mauvais"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29
+    m_Localized: "Essayez d'\xE9viter tout ce qui est rouge"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30
+    m_Localized: Ce commutateur a l'air utile...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31
+    m_Localized: "Apr\xE8s une rotation, vous serez toujours en s\xE9curit\xE9 si
+      vous ne bougez pas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32
+    m_Localized: "Utilisez ce temps pour conna\xEEtre les horaires et passer \xE0
+      l'action"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33
+    m_Localized: Je dois y aller vite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34
+    m_Localized: "Les t\xE9l\xE9porteurs ne servent pas seulement \xE0 terminer un
+      niveau"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35
+    m_Localized: "Ils peuvent vous t\xE9l\xE9porter vers leur homologue correspondant
+      dans un niveau"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36
+    m_Localized: "C'est une t\xE2che verrouill\xE9e..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37
+    m_Localized: Peu importe, tu l'as
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38
+    m_Localized: "Imaginez qu'une r\xE9ussite apparaisse"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39
+    m_Localized: "Les commutateurs ne sont-ils pas impr\xE9visibles"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40
+    m_Localized: Eh bien, au revoir pour toujours, mon amour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41
+    m_Localized: Minuteur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42
+    m_Localized: Des sons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43
+    m_Localized: Inconditionnel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44
+    m_Localized: Langue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45
+    m_Localized: Sur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46
+    m_Localized: "D\xE9sactiv\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34702557093888
+    m_Localized: Retour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40090933305344
+    m_Localized: "Fran\xE7ais"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

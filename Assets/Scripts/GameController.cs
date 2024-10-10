@@ -3,55 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    // Controllers
+    public PlayerController playerController;
+    public RotationController rotationController;
+
+    // UI Elements
+    public GameObject mainMenu;
+    public GameObject OptAudioOn;
+    public GameObject OptAudioOff;
 
     // Core Variables
     public GameObject cube;                    // The cube the player is currently on
     public GameObject allLevels;                // The parent empty GameObject containing all the levels
     public List<GameObject> levels;             // Ordered list of levels
     private int level;                          // Current level
-    public TextController textController;       // Manages all text and translations
 
     // Reset Variables
     public List<GameObject> resetDisables;      // List of all objects to disable on a reset
     public List<GameObject> resetEnables;       // List of all objects to enable on a reset
     public List<GameObject> resetRotates;       // List of all objects to rotate on a reset
 
-    // UI Objects
+    // In Game UI Objects
     public TextMeshPro textLevel;           // UI Level Text Object
     public TextMeshPro textTimer;           // UI Timer Text Object
 
     // Option objects and variables
     public double timer;
-    public bool timerOn;
     public bool isHardcore;
-    public TextMeshPro textOptionTimer;
-    public TextMeshPro textOptionMusic;
-    public TextMeshPro textOptionSounds;
-    public TextMeshPro textOptionHardcore;
+    public string language;
 
     //Camera variables
     public Camera cam;
-    public PlayerController player;
     public bool camFinishedMove;                // Used for FOV Sliding effect on launch
 
-    // Rotation variables
-    public RotationController rc;
-
-    // Rotation triggering objects
-    public GameObject doors;                    // The parent empty GameObject containing all the doors
-    public GameObject doorLeft;
-    public GameObject doorRight;
-    public GameObject doorTop;
-    public GameObject doorBottom;
-
-    
 
     // Audio objects
-    public bool musicOn;
     public bool soundOn;
     public AudioSource music;
     public AudioSource rotateSound;
@@ -62,16 +55,13 @@ public class GameController : MonoBehaviour
     {
         level = 0;
         music.time = 2;
-        timerOn = false;
-        musicOn = true;
         soundOn = true;
         isHardcore = false;
 
         music.Play();
-        //textController.Init();
         SetCubeControl();
         LoadGame();
-        OptionUpdateTexts();
+        UpdateOptionsUI();
     }
 
     void Update()
@@ -80,13 +70,10 @@ public class GameController : MonoBehaviour
         {
             textLevel.text = "";
         }
-        else //Add language options
+        else
         {
             textLevel.text = "Level " + level.ToString();
-            if(timerOn)
-            {
-                textTimer.text = "Timer: " + timer.ToString("N1");
-            }
+            textTimer.text = "Timer: " + timer.ToString("N1");
         }
     }
 
@@ -101,10 +88,10 @@ public class GameController : MonoBehaviour
             else
             {
                 camFinishedMove = true;
-                player.canMove = true;
+                playerController.canMove = true;
             }
         }
-        if (level != 0 && timerOn)
+        if (level != 0)
         {
 
             timer += Time.deltaTime;
@@ -116,9 +103,9 @@ public class GameController : MonoBehaviour
         {
             rotateSound.Play();
         }
-        rc.rotateDirection = way;                                        //Stores the rotation orientation
-        rc.rotateQueued = true;                                    //Tells the controller to start a rotation
-        rc.playerPOS = player.gameObject.transform.position;       //Stores the player position
+        rotationController.rotateDirection = way;                                        //Stores the rotation orientation
+        rotationController.rotateQueued = true;                                    //Tells the controller to start a rotation
+        rotationController.playerPOS = playerController.gameObject.transform.position;       //Stores the player position
     }
 
     public void NextLevel()
@@ -129,10 +116,10 @@ public class GameController : MonoBehaviour
             {
                 nextLevelSound.Play();
             }
-            rc.moveQueued = true;
+            rotationController.moveQueued = true;
             level++;
             SetCubeControl();
-            player.gameObject.SetActive(false);                     //Removes the player from view
+            playerController.gameObject.SetActive(false);                     //Removes the player from view
         }
         else
         {
@@ -168,14 +155,6 @@ public class GameController : MonoBehaviour
 
     public void OptionChange(string option)
     {
-        if(option == "timer")
-        {
-            timerOn = !timerOn;
-        }
-        if (option == "music")
-        {
-            musicOn = !musicOn;
-        }
         if (option == "sounds")
         {
             soundOn = !soundOn;
@@ -261,22 +240,6 @@ public class GameController : MonoBehaviour
 
     public void SaveGame()
     {
-        if (timerOn)
-        {
-            PlayerPrefs.SetInt("timer", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("timer", 0);
-        }
-        if (musicOn)
-        {
-            PlayerPrefs.SetInt("music", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("music", 0);
-        }
         if (soundOn)
         {
             PlayerPrefs.SetInt("sounds", 1);
@@ -296,52 +259,6 @@ public class GameController : MonoBehaviour
     }
     public void LoadGame()
     {
-        if (PlayerPrefs.HasKey("timer"))
-        {
-            if (PlayerPrefs.GetInt("timer") == 1)
-            {
-                timerOn = true;
-            }
-            else
-            {
-                timerOn = false;
-            }
-        }
-        else
-        {
-            if (timerOn)
-            {
-                PlayerPrefs.SetInt("timer", 1);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("timer", 0);
-            }
-        }
-        //-----------------------------------------------
-        if (PlayerPrefs.HasKey("music"))
-        {
-            if (PlayerPrefs.GetInt("music") == 1)
-            {
-                musicOn = true;
-            }
-            else
-            {
-                musicOn = false;
-            }
-        }
-        else
-        {
-            if (musicOn)
-            {
-                PlayerPrefs.SetInt("music", 1);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("music", 0);
-            }
-        }
-        //-----------------------------------------------
         if (PlayerPrefs.HasKey("sounds"))
         {
             if (PlayerPrefs.GetInt("sounds") == 1)
@@ -388,4 +305,111 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
+    public void ChangeLanguage(string locale)
+    {
+        if (locale == "english")
+        {
+            StartCoroutine(SetLocale(0));
+        }
+        if (locale == "french")
+        {
+            StartCoroutine(SetLocale(1));
+        }
+        if (locale == "german")
+        {
+            StartCoroutine(SetLocale(2));
+        }
+        if (locale == "polish")
+        {
+            StartCoroutine(SetLocale(3));
+        }
+        if (locale == "portuguese")
+        {
+            StartCoroutine(SetLocale(4));
+        }
+        if (locale == "russian")
+        {
+            StartCoroutine(SetLocale(5));
+        }
+        if (locale == "spanish")
+        {
+            StartCoroutine(SetLocale(6));
+        }
+    }
+    
+    IEnumerator SetLocale(int localeId)
+    {
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+    }
+
+    public void PlayButton()
+    {
+        mainMenu.SetActive(false);
+    }
+
+    public void OptionsButton()
+    {
+        mainMenu.SetActive(false);
+    }
+
+    public void ToggleHardcore()
+    {
+        isHardcore = !isHardcore;
+        UpdateOptionsUI();
+    }
+
+    public void ToggleAudio()
+    {
+        soundOn = !soundOn;
+        if (soundOn)
+        {
+            music.time = 2;
+            music.Play();
+        }
+        else
+        {
+            music.Stop();
+        }
+        UpdateOptionsUI();
+    }
+
+    public void UpdateOptionsUI()
+    {
+        OptAudioOn.SetActive(soundOn);
+        OptAudioOff.SetActive(!soundOn);
+    }
+
+    public void ToggleLanguage()
+    {
+        int i = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
+        if (i > 5) //Catches int overflow
+        {
+            i = 0;
+        }
+        else
+        {
+            i++;
+        }
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i];
+    }
+
+    public void QuitGame()
+    {
+        #if UNITY_STANDALONE
+            Application.Quit();
+        #endif
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
+
+    [SerializeField]
+    private Selectable selectable = null;
+    public void Hover()
+    {
+        selectable.Select();
+    }
+
 }

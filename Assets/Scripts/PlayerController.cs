@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public bool scaleRightRevertQueued = false;
 
     public float scaleProgress;
-    private readonly float scaleSpeed = 0.05f;
+    private readonly float scaleSpeed = 0.025f;
 
     public List<string> achievements;
 
@@ -40,11 +40,29 @@ public class PlayerController : MonoBehaviour
     {
         axisX = Input.GetAxisRaw("Horizontal");
         axisZ = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            gameController.ToggleLanguage();
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            gameController.NextLevel();
+        }
     }
+
+    
 
     void FixedUpdate()
     {
-        body.velocity = new Vector3(axisX, 0f, axisZ) * moveSpeed;
+        if (!isScaling && !gameController.rotationController.isRotating && !gameController.rotationController.isMoving)
+        {
+            body.velocity = new Vector3(axisX, 0f, axisZ) * moveSpeed;
+        }
+        else
+        {
+            body.velocity = Vector3.zero;
+        }
 
         if (scaleUpQueued)
         {
@@ -61,7 +79,7 @@ public class PlayerController : MonoBehaviour
                 gameController.Rotate("up");
             }
         }
-        if (scaleUpRevertQueued)
+        else if (scaleUpRevertQueued)
         {
             isScaling = true;
 
@@ -78,7 +96,7 @@ public class PlayerController : MonoBehaviour
                 canMove = true;
             }
         }
-        if (scaleDownQueued)
+        else if (scaleDownQueued)
         {
             isScaling = true;
 
@@ -93,7 +111,7 @@ public class PlayerController : MonoBehaviour
                 gameController.Rotate("down");
             }
         }
-        if (scaleDownRevertQueued)
+        else if (scaleDownRevertQueued)
         {
             isScaling = true;
 
@@ -110,7 +128,7 @@ public class PlayerController : MonoBehaviour
                 canMove = true;
             }
         }
-        if (scaleLeftQueued)
+        else if (scaleLeftQueued)
         {
             isScaling = true;
 
@@ -125,7 +143,7 @@ public class PlayerController : MonoBehaviour
                 gameController.Rotate("left");
             }
         }
-        if (scaleLeftRevertQueued)
+        else if (scaleLeftRevertQueued)
         {
             isScaling = true;
 
@@ -142,7 +160,7 @@ public class PlayerController : MonoBehaviour
                 canMove = true;
             }
         }
-        if (scaleRightQueued)
+        else if (scaleRightQueued)
         {
             isScaling = true;
 
@@ -157,7 +175,7 @@ public class PlayerController : MonoBehaviour
                 gameController.Rotate("right");
             }
         }
-        if (scaleRightRevertQueued)
+        else if (scaleRightRevertQueued)
         {
             isScaling = true;
 
