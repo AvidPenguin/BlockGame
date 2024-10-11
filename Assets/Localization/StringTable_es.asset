@@ -18,202 +18,226 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 3552677634048
+  - m_Id: 1
     m_Localized: Jugar
     m_Metadata:
       m_Items: []
-  - m_Id: 1
-    m_Localized: Opciones
-    m_Metadata:
-      m_Items: []
   - m_Id: 2
-    m_Localized: "Cr\xE9ditos"
+    m_Localized: "M\xFAsica encendida"
     m_Metadata:
       m_Items: []
   - m_Id: 3
-    m_Localized: Abandonar
+    m_Localized: "M\xFAsica apagada"
     m_Metadata:
       m_Items: []
   - m_Id: 4
-    m_Localized: Un juego de
+    m_Localized: Suena encendido
     m_Metadata:
       m_Items: []
   - m_Id: 5
-    m_Localized: "Dise\xF1o de niveles"
+    m_Localized: Sonidos apagados
     m_Metadata:
       m_Items: []
   - m_Id: 6
-    m_Localized: "Programaci\xF3n"
+    m_Localized: Modo duro
     m_Metadata:
       m_Items: []
   - m_Id: 7
-    m_Localized: "M\xFAsica"
+    m_Localized: Modo normal
     m_Metadata:
       m_Items: []
   - m_Id: 8
-    m_Localized: Pruebas
+    m_Localized: Seleccionar nivel
     m_Metadata:
       m_Items: []
   - m_Id: 9
-    m_Localized: Traducciones
+    m_Localized: Abandonar
     m_Metadata:
       m_Items: []
   - m_Id: 10
-    m_Localized: "\xBFSeguro?"
+    m_Localized: Logros
     m_Metadata:
       m_Items: []
   - m_Id: 11
-    m_Localized: El objetivo es llegar al teletransportador verde para avanzar al
-      siguiente cubo
+    m_Localized: "Estad\xEDstica"
     m_Metadata:
       m_Items: []
   - m_Id: 12
-    m_Localized: "As\xED de sencillo"
+    m_Localized: 'Tiempos jugados:'
     m_Metadata:
       m_Items: []
   - m_Id: 13
-    m_Localized: En realidad, no siempre es tan sencillo
+    m_Localized: 'Tiempos muertos:'
     m_Metadata:
       m_Items: []
   - m_Id: 14
-    m_Localized: "Eso har\xEDa todo el juego un poco aburrido, \xBFno?"
+    m_Localized: 'Rotaciones:'
     m_Metadata:
       m_Items: []
   - m_Id: 15
-    m_Localized: "\xBFEs \xE9ste el camino correcto?"
+    m_Localized: "Carrera m\xE1s r\xE1pida:"
     m_Metadata:
       m_Items: []
   - m_Id: 16
-    m_Localized: Ciertamente parece
+    m_Localized: un juego de
     m_Metadata:
       m_Items: []
   - m_Id: 17
-    m_Localized: "Emocionante secci\xF3n de juego"
+    m_Localized: "Programaci\xF3n"
     m_Metadata:
       m_Items: []
   - m_Id: 18
-    m_Localized: Nope
+    m_Localized: "Dise\xF1o de niveles"
     m_Metadata:
       m_Items: []
   - m_Id: 19
-    m_Localized: Esta es una puerta cerrada
+    m_Localized: "M\xFAsica"
     m_Metadata:
       m_Items: []
   - m_Id: 20
-    m_Localized: Debe haber una manera de desbloquearlo
+    m_Localized: Pruebas
     m_Metadata:
       m_Items: []
   - m_Id: 21
-    m_Localized: Este es mi interruptor y me encanta
+    m_Localized: Traducciones
     m_Metadata:
       m_Items: []
   - m_Id: 22
-    m_Localized: Aunque no tengo ni idea de lo que hace
+    m_Localized: "\xA1Bienvenidos a C\xFAbico!"
     m_Metadata:
       m_Items: []
   - m_Id: 23
-    m_Localized: Oh, eres del tipo explorador
+    m_Localized: "Dir\xEDgete al borde de un cubo para viajar hacia ese lado. "
     m_Metadata:
       m_Items: []
   - m_Id: 24
-    m_Localized: "Este interruptor se basa en la orientaci\xF3n"
+    m_Localized: El objetivo de cada nivel es llegar al teletransportador verde.
     m_Metadata:
       m_Items: []
   - m_Id: 25
-    m_Localized: Intenta hacer que la flecha mire hacia arriba
+    m_Localized: "\xA1Es as\xED de simple!"
     m_Metadata:
       m_Items: []
   - m_Id: 26
-    m_Localized: Intenta no pensar en dos dimensiones
+    m_Localized: En realidad, no siempre es tan simple.
     m_Metadata:
       m_Items: []
   - m_Id: 27
-    m_Localized: Al fin y al cabo, un cubo es un objeto tridimensional.
+    m_Localized: "Eso har\xEDa que todo el juego fuera un poco aburrido, \xBFno?"
     m_Metadata:
       m_Items: []
   - m_Id: 28
-    m_Localized: Si no es obvio, rojo = malo
+    m_Localized: "\xBFEs esta la manera correcta?"
     m_Metadata:
       m_Items: []
   - m_Id: 29
-    m_Localized: Intenta evitar todo lo que sea rojo
+    m_Localized: No
     m_Metadata:
       m_Items: []
   - m_Id: 30
-    m_Localized: "Ese interruptor parece \xFAtil..."
+    m_Localized: Ciertamente lo parece
     m_Metadata:
       m_Items: []
   - m_Id: 31
-    m_Localized: "Despu\xE9s de una rotaci\xF3n, siempre estar\xE1s a salvo si no
-      te mueves"
+    m_Localized: "Secci\xF3n de juego emocionante"
     m_Metadata:
       m_Items: []
   - m_Id: 32
-    m_Localized: Utiliza este tiempo para aprender los tiempos y hacer tu movimiento
+    m_Localized: Esta es una puerta cerrada
     m_Metadata:
       m_Items: []
   - m_Id: 33
-    m_Localized: "Hay que ir r\xE1pido"
+    m_Localized: Debe haber una manera de desbloquearlo.
     m_Metadata:
       m_Items: []
   - m_Id: 34
-    m_Localized: "Los teletransportadores no s\xF3lo sirven para terminar un nivel"
+    m_Localized: "\xA1Buen trabajo!"
     m_Metadata:
       m_Items: []
   - m_Id: 35
-    m_Localized: "Pueden teletransportarte a su hom\xF3logo en un nivel"
+    m_Localized: "Sin embargo, los interruptores pueden hacer mucho m\xE1s."
     m_Metadata:
       m_Items: []
   - m_Id: 36
-    m_Localized: Esta es una puerta cerra...
+    m_Localized: Este es un interruptor
     m_Metadata:
       m_Items: []
   - m_Id: 37
-    m_Localized: No importa, lo tienes
+    m_Localized: "\xBFQuiz\xE1s abrir\xE1 esa puerta?"
     m_Metadata:
       m_Items: []
   - m_Id: 38
-    m_Localized: Imagina que aparece un logro
+    m_Localized: "Oh, \xBFte gusta explorar?"
     m_Metadata:
       m_Items: []
   - m_Id: 39
-    m_Localized: "\xBFNo son impredecibles los interruptores?"
+    m_Localized: "Me pregunto qu\xE9 lograr\xE1 eso..."
     m_Metadata:
       m_Items: []
   - m_Id: 40
-    m_Localized: "Bueno, adi\xF3s para siempre, mi amor"
+    m_Localized: "Este interruptor se basa en la orientaci\xF3n."
     m_Metadata:
       m_Items: []
   - m_Id: 41
-    m_Localized: Temporizador
+    m_Localized: "S\xF3lo se puede utilizar cuando apunta hacia arriba."
     m_Metadata:
       m_Items: []
   - m_Id: 42
-    m_Localized: Suena
+    m_Localized: "Intenta no pensar en s\xF3lo dos dimensiones."
     m_Metadata:
       m_Items: []
   - m_Id: 43
-    m_Localized: Hardcore
+    m_Localized: "Despu\xE9s de todo, un cubo es un objeto tridimensional."
     m_Metadata:
       m_Items: []
   - m_Id: 44
-    m_Localized: Idioma
+    m_Localized: Si no es obvio, rojo = malo
     m_Metadata:
       m_Items: []
   - m_Id: 45
-    m_Localized: Encendido
+    m_Localized: Intenta evitar todo lo que sea rojo.
     m_Metadata:
       m_Items: []
   - m_Id: 46
-    m_Localized: Apagado
+    m_Localized: "Ese interruptor parece \xFAtil"
     m_Metadata:
       m_Items: []
-  - m_Id: 34702557093888
-    m_Localized: Volver
-    m_Metadata:
-      m_Items: []
-  - m_Id: 40090933305344
+  - m_Id: 941068700262400
     m_Localized: "Espa\xF1ol"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47
+    m_Localized: "Despu\xE9s de una rotaci\xF3n, siempre estar\xE1s seguro si no
+      te mueves"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48
+    m_Localized: "Utilice este tiempo para determinar qu\xE9 ruta tomar\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49
+    m_Localized: "tengo que ir r\xE1pido"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50
+    m_Localized: Los teletransportadores no solo se usan para terminar un nivel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51
+    m_Localized: Pueden teletransportarte a su contraparte correspondiente en un
+      nivel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53
+    m_Localized: Nivel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54
+    m_Localized: Tiempo
     m_Metadata:
       m_Items: []
   references:

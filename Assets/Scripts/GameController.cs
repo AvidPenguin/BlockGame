@@ -14,10 +14,18 @@ public class GameController : MonoBehaviour
     public PlayerController playerController;
     public RotationController rotationController;
 
-    // UI Elements
+    // Menu Elements
+    public bool inMenu;
     public GameObject mainMenu;
-    public GameObject OptAudioOn;
-    public GameObject OptAudioOff;
+    public GameObject logo;
+    public GameObject logoRed;
+    public TextMeshProUGUI OptMusicOn;
+    public TextMeshProUGUI OptMusicOff;
+    public TextMeshProUGUI OptSoundsOn;
+    public TextMeshProUGUI OptSoundsOff;
+    public TextMeshProUGUI OptHardcoreOn;
+    public TextMeshProUGUI OptHardcoreOff;
+    public GameObject menuBackground;
 
     // Core Variables
     public GameObject cube;                    // The cube the player is currently on
@@ -36,8 +44,7 @@ public class GameController : MonoBehaviour
 
     // Option objects and variables
     public double timer;
-    public bool isHardcore;
-    public string language;
+    public bool hardcoreOn;
 
     //Camera variables
     public Camera cam;
@@ -45,6 +52,7 @@ public class GameController : MonoBehaviour
 
 
     // Audio objects
+    public bool musicOn;
     public bool soundOn;
     public AudioSource music;
     public AudioSource rotateSound;
@@ -53,27 +61,33 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        inMenu = true;
         level = 0;
-        music.time = 2;
+        musicOn = true;
         soundOn = true;
-        isHardcore = false;
-
-        music.Play();
+        hardcoreOn = false;
         SetCubeControl();
         LoadGame();
+        if (musicOn)
+        {
+            music.time = 2;
+            music.Play();
+        }
+
         UpdateOptionsUI();
     }
 
     void Update()
     {
-        if (level == 0) 
+        if (level == 0)
         {
             textLevel.text = "";
+            textTimer.text = "";
         }
         else
         {
-            textLevel.text = "Level " + level.ToString();
-            textTimer.text = "Timer: " + timer.ToString("N1");
+            textLevel.text = level.ToString();
+            textTimer.text = timer.ToString("N1");
         }
     }
 
@@ -161,57 +175,14 @@ public class GameController : MonoBehaviour
         }
         if (option == "hardcore")
         {
-            isHardcore = !isHardcore;
+            hardcoreOn = !hardcoreOn;
         }
 
-        OptionUpdateTexts();
         SaveGame();
+        UpdateOptionsUI();
     }
 
-    public void OptionUpdateTexts()
-    {
-        /**
-        if (!isHardcore)
-        {
-            textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[1];
-            textTimer.color = Color.white;
-            textLevel.color = Color.white;
-        }
-        else
-        {
-            textOptionHardcore.text = textController.GetOptionText(3) + " : " + textController.onoffEnglish[0];
-            textTimer.color = Color.red;
-            textLevel.color = Color.red;
-        }
-        if (!soundOn)
-        {
-            textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[1];
-        }
-        else
-        {
-            textOptionSounds.text = textController.GetOptionText(2) + " : " + textController.onoffEnglish[0];
-        }
-        if (!musicOn)
-        {
-            music.Stop();
-            textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[1];
-        }
-        else
-        {
-            music.time = 2;
-            music.Play();
-            textOptionMusic.text = textController.GetOptionText(1) + " : " + textController.onoffEnglish[0];
-        }
-        if (!timerOn)
-        {
-            textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[1];
-        }
-        else
-        {
-            textOptionTimer.text = textController.GetOptionText(0) + " : " + textController.onoffEnglish[0];
-        }
-        */
-    }
+    
 
     public void ResetLevels()
     {
@@ -240,6 +211,14 @@ public class GameController : MonoBehaviour
 
     public void SaveGame()
     {
+        if (musicOn)
+        {
+            PlayerPrefs.SetInt("music", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("music", 0);
+        }
         if (soundOn)
         {
             PlayerPrefs.SetInt("sounds", 1);
@@ -248,7 +227,7 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetInt("sounds", 0);
         }
-        if (isHardcore)
+        if (hardcoreOn)
         {
             PlayerPrefs.SetInt("hardcore", 1);
         }
@@ -256,6 +235,7 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetInt("hardcore", 0);
         }
+        PlayerPrefs.SetInt("language", LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale));
     }
     public void LoadGame()
     {
@@ -286,16 +266,16 @@ public class GameController : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("hardcore") == 1)
             {
-                isHardcore = true;
+                hardcoreOn = true;
             }
             else
             {
-                isHardcore = false;
+                hardcoreOn = false;
             }
         }
         else
         {
-            if (isHardcore)
+            if (hardcoreOn)
             {
                 PlayerPrefs.SetInt("hardcore", 1);
             }
@@ -303,6 +283,15 @@ public class GameController : MonoBehaviour
             {
                 PlayerPrefs.SetInt("hardcore", 0);
             }
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("language"))
+        {
+            StartCoroutine(SetLocale(PlayerPrefs.GetInt("language")));
+        }
+        else
+        {
+            PlayerPrefs.SetInt("language", LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale));
         }
     }
 
@@ -347,23 +336,20 @@ public class GameController : MonoBehaviour
     public void PlayButton()
     {
         mainMenu.SetActive(false);
-    }
-
-    public void OptionsButton()
-    {
-        mainMenu.SetActive(false);
+        inMenu = false;
     }
 
     public void ToggleHardcore()
     {
-        isHardcore = !isHardcore;
+        hardcoreOn = !hardcoreOn;
+        
         UpdateOptionsUI();
     }
 
-    public void ToggleAudio()
+    public void ToggleMusic()
     {
-        soundOn = !soundOn;
-        if (soundOn)
+        musicOn = !musicOn;
+        if (musicOn)
         {
             music.time = 2;
             music.Play();
@@ -374,11 +360,35 @@ public class GameController : MonoBehaviour
         }
         UpdateOptionsUI();
     }
+    public void ToggleSounds()
+    {
+        soundOn = !soundOn;
+        UpdateOptionsUI();
+    }
 
     public void UpdateOptionsUI()
     {
-        OptAudioOn.SetActive(soundOn);
-        OptAudioOff.SetActive(!soundOn);
+        OptMusicOn.gameObject.SetActive(musicOn);
+        OptMusicOff.gameObject.SetActive(!musicOn);
+        OptSoundsOn.gameObject.SetActive(soundOn);
+        OptSoundsOff.gameObject.SetActive(!soundOn);
+        OptHardcoreOn.gameObject.SetActive(hardcoreOn);
+        OptHardcoreOff.gameObject.SetActive(!hardcoreOn);
+        
+        if (!hardcoreOn)
+        {
+            menuBackground.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
+            cam.backgroundColor = new Color32(67, 67, 106, 255);
+            logo.SetActive(true);
+            logoRed.SetActive(false);
+        }
+        else
+        {
+            menuBackground.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
+            cam.backgroundColor = new Color32(106, 67, 67, 255);
+            logo.SetActive(false);
+            logoRed.SetActive(true);
+        }
     }
 
     public void ToggleLanguage()

@@ -29,16 +29,31 @@ public class UIButtonController : MonoBehaviour, IPointerEnterHandler
             foreach (TextMeshProUGUI text in texts)
             {
                 text.fontSize = 120;
-                text.color = new Color32(106, 151, 206, 255);
+                if(FindObjectOfType<GameController>().hardcoreOn)
+                {
+                    text.color = new Color32(206, 151, 106, 255);
+                }
+                else
+                {
+                    text.color = new Color32(106, 151, 206, 255);
+                }
             }
         }
         else
         {
-            foreach (TextMeshProUGUI text in texts)
+            try
             {
-                text.fontSize = 96;
-                text.color = Color.white;
+                foreach (TextMeshProUGUI text in texts)
+                {
+                    text.fontSize = 96;
+                    text.color = Color.white;
+                }
             }
+            catch
+            {
+                // Stops error when nothing is selected
+            }
+            
         }
         // check if button is selected
         // do something to the texts inside it

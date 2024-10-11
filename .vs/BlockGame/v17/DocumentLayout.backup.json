@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Dan\\BlockGame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\uibuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uibuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|c:\\users\\dan\\blockgame\\assets\\scripts\\uibuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uibuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|c:\\users\\dan\\blockgame\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\triggercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E55A415A-EA51-02A0-41E6-5A398AAECD7F}|Assembly-CSharp.csproj|C:\\Users\\Dan\\BlockGame\\assets\\scripts\\teleportercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,30 +42,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "UIButtonController.cs",
               "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\UIButtonController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UIButtonController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\UIButtonController.cs",
               "RelativeToolTip": "Assets\\Scripts\\UIButtonController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwB4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-09T05:32:12.634Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "GameController.cs",
               "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\GameController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\GameController.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameController.cs",
-              "ViewState": "AgIAAE0BAAAAAAAAAADwv28BAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAHABAAAAAAAAAAAQwHYBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T06:02:39.93Z",
               "EditorCaption": ""
@@ -84,7 +84,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "EnemyController.cs",
               "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\EnemyController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyController.cs",
@@ -96,25 +96,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TriggerController.cs",
               "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TriggerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\TriggerController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\TriggerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\TriggerController.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAWwEoAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAWwEoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-04T00:39:20.123Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RotationController.cs",
               "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\RotationController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\RotationController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\RotationController.cs",
               "RelativeToolTip": "Assets\\Scripts\\RotationController.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAowBgAAABnAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAQwDAAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T19:02:35.008Z"
             },
@@ -132,15 +132,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
-              "ViewState": "AgIAAK8AAAAAAAAAAAAowLYAAACmAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwDEAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T05:53:06.693Z"
+              "WhenOpened": "2024-10-02T05:53:06.693Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -38,17 +38,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        axisX = Input.GetAxisRaw("Horizontal");
-        axisZ = Input.GetAxisRaw("Vertical");
+        if (!gameController.inMenu)
+        {
+            axisX = Input.GetAxisRaw("Horizontal");
+            axisZ = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            gameController.ToggleLanguage();
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                gameController.ToggleLanguage();
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                gameController.NextLevel();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            gameController.NextLevel();
-        }
+        
     }
 
     
@@ -249,7 +253,7 @@ public class PlayerController : MonoBehaviour
             if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet"))
             {
                 // TODO: Add death animation
-                if (gameController.isHardcore)
+                if (gameController.hardcoreOn)
                 {
                     gameController.ResetLevels();
                 }

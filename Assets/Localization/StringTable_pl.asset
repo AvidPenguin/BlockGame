@@ -18,205 +18,230 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 3552677634048
+  - m_Id: 1
     m_Localized: "Gra\u0107"
     m_Metadata:
       m_Items: []
-  - m_Id: 1
-    m_Localized: Opcje
-    m_Metadata:
-      m_Items: []
   - m_Id: 2
-    m_Localized: Kredyty
+    m_Localized: "Muzyka w\u0142\u0105czona"
     m_Metadata:
       m_Items: []
   - m_Id: 3
-    m_Localized: "Zrezygnowa\u0107"
+    m_Localized: "Muzyka wy\u0142\u0105czona"
     m_Metadata:
       m_Items: []
   - m_Id: 4
-    m_Localized: Gra autorstwa
+    m_Localized: Brzmi dalej
     m_Metadata:
       m_Items: []
   - m_Id: 5
-    m_Localized: Projekt poziomu
+    m_Localized: "Brzmi nieprawid\u0142owo"
     m_Metadata:
       m_Items: []
   - m_Id: 6
-    m_Localized: Programowanie
+    m_Localized: Tryb hardcorowy
     m_Metadata:
       m_Items: []
   - m_Id: 7
-    m_Localized: Muzyka
+    m_Localized: Tryb normalny
     m_Metadata:
       m_Items: []
   - m_Id: 8
-    m_Localized: Testowanie
+    m_Localized: Wybierz poziom
     m_Metadata:
       m_Items: []
   - m_Id: 9
-    m_Localized: "T\u0142umaczenia"
+    m_Localized: "Zrezygnowa\u0107"
     m_Metadata:
       m_Items: []
   - m_Id: 10
-    m_Localized: "Czy jeste\u015B pewien?"
+    m_Localized: "Osi\u0105gni\u0119cia"
     m_Metadata:
       m_Items: []
   - m_Id: 11
-    m_Localized: "Celem jest dotarcie do zielonego teleportu, aby przej\u015B\u0107
-      do nast\u0119pnej kostki"
+    m_Localized: Statystyka
     m_Metadata:
       m_Items: []
   - m_Id: 12
-    m_Localized: To takie proste
+    m_Localized: "Liczba zagra\u0144:"
     m_Metadata:
       m_Items: []
   - m_Id: 13
-    m_Localized: "W\u0142a\u015Bciwie nie zawsze jest to takie proste"
+    m_Localized: "Liczba zgon\xF3w:"
     m_Metadata:
       m_Items: []
   - m_Id: 14
+    m_Localized: 'Obroty:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15
+    m_Localized: 'Najszybszy bieg:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16
+    m_Localized: Gra autorstwa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17
+    m_Localized: Programowanie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18
+    m_Localized: Projekt poziomu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19
+    m_Localized: Muzyka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20
+    m_Localized: Testowanie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21
+    m_Localized: "T\u0142umaczenia"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22
+    m_Localized: Witamy w Cubico!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23
+    m_Localized: "Udaj si\u0119 do kraw\u0119dzi sze\u015Bcianu, aby przej\u015B\u0107
+      na t\u0119 stron\u0119 "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24
+    m_Localized: "Celem ka\u017Cdego poziomu jest dotarcie do zielonego teleportera"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25
+    m_Localized: To takie proste!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26
+    m_Localized: "W\u0142a\u015Bciwie nie zawsze jest to takie proste"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27
     m_Localized: "To sprawi\u0142oby, \u017Ce ca\u0142a gra by\u0142aby troch\u0119
       nudna, prawda?"
     m_Metadata:
       m_Items: []
-  - m_Id: 15
+  - m_Id: 28
     m_Localized: "Czy to w\u0142a\u015Bciwy spos\xF3b?"
     m_Metadata:
       m_Items: []
-  - m_Id: 16
-    m_Localized: "Z pewno\u015Bci\u0105 na to wygl\u0105da"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 17
-    m_Localized: "Ekscytuj\u0105ca sekcja rozgrywki"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 18
+  - m_Id: 29
     m_Localized: Nie
     m_Metadata:
       m_Items: []
-  - m_Id: 19
-    m_Localized: "To s\u0105 zamkni\u0119te drzwi"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20
-    m_Localized: "Musi by\u0107 spos\xF3b na odblokowanie tego"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 21
-    m_Localized: "To jest m\xF3j prze\u0142\u0105cznik i bardzo mi si\u0119 podoba"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 22
-    m_Localized: "Nie mam jednak poj\u0119cia, co to robi"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 23
-    m_Localized: "Och, jeste\u015B typem odkrywcy"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 24
-    m_Localized: "Ten prze\u0142\u0105cznik opiera si\u0119 na orientacji"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 25
-    m_Localized: "Spr\xF3buj ustawi\u0107 strza\u0142k\u0119 skierowan\u0105 w g\xF3r\u0119"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26
-    m_Localized: "Staraj si\u0119 nie my\u015Ble\u0107 dwuwymiarowo"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 27
-    m_Localized: "W ko\u0144cu sze\u015Bcian jest obiektem tr\xF3jwymiarowym"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 28
-    m_Localized: "Je\u015Bli nie jest to oczywiste, czerwony = z\u0142y"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 29
-    m_Localized: "Staraj si\u0119 unika\u0107 wszystkiego, co jest czerwone"
-    m_Metadata:
-      m_Items: []
   - m_Id: 30
-    m_Localized: "Ten prze\u0142\u0105cznik wygl\u0105da na przydatny..."
+    m_Localized: "Z pewno\u015Bci\u0105 na to wygl\u0105da"
     m_Metadata:
       m_Items: []
   - m_Id: 31
+    m_Localized: "Ekscytuj\u0105ca sekcja rozgrywki"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32
+    m_Localized: "To s\u0105 zamkni\u0119te drzwi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33
+    m_Localized: "Musi by\u0107 spos\xF3b na odblokowanie tego"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34
+    m_Localized: Dobra robota!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35
+    m_Localized: "Prze\u0142\u0105czniki mog\u0105 jednak znacznie wi\u0119cej"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36
+    m_Localized: "To jest prze\u0142\u0105cznik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37
+    m_Localized: "Mo\u017Ce otworzy te drzwi?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38
+    m_Localized: "Och, lubisz zwiedza\u0107?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39
+    m_Localized: Ciekawe co to da...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40
+    m_Localized: "Ten prze\u0142\u0105cznik opiera si\u0119 na orientacji"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41
+    m_Localized: "Mo\u017Cna go u\u017Cywa\u0107 tylko wtedy, gdy jest skierowany
+      w g\xF3r\u0119"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42
+    m_Localized: "Staraj si\u0119 nie my\u015Ble\u0107 tylko w dw\xF3ch wymiarach"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43
+    m_Localized: "W ko\u0144cu sze\u015Bcian jest obiektem tr\xF3jwymiarowym"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44
+    m_Localized: "Je\u015Bli nie jest to oczywiste, czerwony = z\u0142y"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45
+    m_Localized: "Staraj si\u0119 unika\u0107 wszystkiego, co jest czerwone"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46
+    m_Localized: "Ten prze\u0142\u0105cznik wygl\u0105da na przydatny"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 941068700262400
+    m_Localized: Polski
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47
     m_Localized: "Po obrocie zawsze b\u0119dziesz bezpieczny, je\u015Bli si\u0119
       nie poruszysz"
     m_Metadata:
       m_Items: []
-  - m_Id: 32
-    m_Localized: "Wykorzystaj ten czas, aby pozna\u0107 synchronizacj\u0119 i wykona\u0107
-      ruch"
+  - m_Id: 48
+    m_Localized: "Wykorzystaj ten czas, aby dowiedzie\u0107 si\u0119, jak\u0105 tras\u0119
+      wybierzesz"
     m_Metadata:
       m_Items: []
-  - m_Id: 33
+  - m_Id: 49
     m_Localized: "Musz\u0119 i\u015B\u0107 szybko"
     m_Metadata:
       m_Items: []
-  - m_Id: 34
+  - m_Id: 50
     m_Localized: "Teleporty s\u0142u\u017C\u0105 nie tylko do uko\u0144czenia poziomu"
     m_Metadata:
       m_Items: []
-  - m_Id: 35
+  - m_Id: 51
     m_Localized: "Mog\u0105 ci\u0119 teleportowa\u0107 do odpowiedniego odpowiednika
       na danym poziomie"
     m_Metadata:
       m_Items: []
-  - m_Id: 36
-    m_Localized: "To jest zamkni\u0119te zadanie..."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 37
-    m_Localized: "Niewa\u017Cne, masz to"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 38
-    m_Localized: "Wyobra\u017A sobie, \u017Ce pojawi\u0142o si\u0119 osi\u0105gni\u0119cie"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 39
-    m_Localized: "Czy prze\u0142\u0105czniki nie s\u0105 nieprzewidywalne?"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 40
-    m_Localized: "C\xF3\u017C, \u017Cegnaj na zawsze, kochanie"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 41
-    m_Localized: Regulator czasowy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 42
-    m_Localized: Brzmi
-    m_Metadata:
-      m_Items: []
-  - m_Id: 43
-    m_Localized: Hardkor
-    m_Metadata:
-      m_Items: []
-  - m_Id: 44
+  - m_Id: 52
     m_Localized: "J\u0119zyk"
     m_Metadata:
       m_Items: []
-  - m_Id: 45
-    m_Localized: NA
+  - m_Id: 53
+    m_Localized: Poziom
     m_Metadata:
       m_Items: []
-  - m_Id: 46
-    m_Localized: "Wy\u0142\u0105czony"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 34702557093888
-    m_Localized: "Powr\xF3t"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 40090933305344
-    m_Localized: Polski
+  - m_Id: 54
+    m_Localized: Czas
     m_Metadata:
       m_Items: []
   references:
