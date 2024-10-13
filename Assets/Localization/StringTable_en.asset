@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: Play
+    m_Localized: New Run
     m_Metadata:
       m_Items: []
   - m_Id: 2
@@ -236,6 +236,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 54
     m_Localized: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55
+    m_Localized: Continue
     m_Metadata:
       m_Items: []
   references:

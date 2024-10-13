@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     public float axisX;
     public float axisZ;
+
+    public bool godMode = false;
 
     public GameController gameController;
     public Collider col;
@@ -30,6 +33,9 @@ public class PlayerController : MonoBehaviour
     private readonly float scaleSpeed = 0.025f;
 
     public List<string> achievements;
+
+    public bool isDying = false;
+    public bool isReviving = false;
 
     void Start()
     {
@@ -51,6 +57,19 @@ public class PlayerController : MonoBehaviour
             {
                 gameController.NextLevel();
             }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                godMode = !godMode;
+            }
+            if(Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause"))
+            {
+                PlayerPrefs.SetFloat("currenttimer", gameController.timer);
+                gameController.mainMenu.SetActive(true);
+                gameController.inMenu = true;
+                gameController.ResetLevels();
+                gameController.rotationController.SetLevel(0);
+                gameController.UpdateOptionsUI();
+            }
         }
         
     }
@@ -59,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isScaling && !gameController.rotationController.isRotating && !gameController.rotationController.isMoving)
+        if (!isScaling && !gameController.rotationController.isRotating && !gameController.rotationController.isMoving && !isDying)
         {
             body.velocity = new Vector3(axisX, 0f, axisZ) * moveSpeed;
         }
@@ -80,7 +99,7 @@ public class PlayerController : MonoBehaviour
                 scaleUpQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate("up");
+                gameController.Rotate(RotationController.Rotations.Up);
             }
         }
         else if (scaleUpRevertQueued)
@@ -112,7 +131,7 @@ public class PlayerController : MonoBehaviour
                 scaleDownQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate("down");
+                gameController.Rotate(RotationController.Rotations.Down);
             }
         }
         else if (scaleDownRevertQueued)
@@ -144,7 +163,7 @@ public class PlayerController : MonoBehaviour
                 scaleLeftQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate("left");
+                gameController.Rotate(RotationController.Rotations.Left);
             }
         }
         else if (scaleLeftRevertQueued)
@@ -176,14 +195,14 @@ public class PlayerController : MonoBehaviour
                 scaleRightQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate("right");
+                gameController.Rotate(RotationController.Rotations.Right);
             }
         }
         else if (scaleRightRevertQueued)
         {
             isScaling = true;
 
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z - scaleSpeed); ;
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z - scaleSpeed);
             scaleProgress += scaleSpeed;
 
             if (scaleProgress >= 1)
@@ -194,6 +213,39 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = new Quaternion();
                 transform.Translate(new Vector3(0.005f, 0f, 0f));
                 canMove = true;
+            }
+        }
+        if (isDying)
+        {
+            canMove = false;
+            transform.localScale = new Vector3(transform.localScale.x - (scaleSpeed / 4), transform.localScale.y - (scaleSpeed / 4), transform.localScale.z - (scaleSpeed / 4));
+            scaleProgress += scaleSpeed;
+            if (scaleProgress >= 2)
+            {
+                if (gameController.hardcoreOn)
+                {
+                    gameController.ResetLevels();
+                }
+                else
+                {
+                    gameController.ResetLevel();
+                }
+                this.transform.position = new Vector3(0, 5, 0);
+                isReviving = true;
+                isDying = false;
+                scaleProgress = 0;
+            }
+        }
+        if (isReviving)
+        {
+            transform.localScale = new Vector3(transform.localScale.x + (scaleSpeed / 4), transform.localScale.y + (scaleSpeed / 4), transform.localScale.z + (scaleSpeed / 4));
+            scaleProgress += scaleSpeed;
+            if (scaleProgress >= 2)
+            {
+                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                canMove = true;
+                isReviving = false;
+                scaleProgress = 0;
             }
         }
     }
@@ -208,7 +260,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-
         if(canMove)
         {
             if (collision.gameObject.CompareTag("TeleporterLocal"))
@@ -250,27 +301,13 @@ public class PlayerController : MonoBehaviour
                 collision.gameObject.GetComponent<TriggerController>().Trigger();
             }
 
-            if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet"))
+            if (collision.gameObject.CompareTag("Enemy") )
             {
-                // TODO: Add death animation
-                if (gameController.hardcoreOn)
+                if(!godMode)
                 {
-                    gameController.ResetLevels();
+                    isDying = true;
                 }
-                else
-                {
-                    gameController.ResetLevel();
-                }
-                if(collision.gameObject.CompareTag("Bullet"))
-                {
-                    Destroy(collision.gameObject);
-                }
-                this.transform.position = new Vector3(0, 5.125f, 0);
             }
-        }
-        
+        }   
     }
-
-
-
 }

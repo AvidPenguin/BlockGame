@@ -26,12 +26,15 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI OptHardcoreOn;
     public TextMeshProUGUI OptHardcoreOff;
     public GameObject menuBackground;
+    public TextMeshProUGUI VersionText;
+    public GameObject buttonPlay;
+    public GameObject buttonContinue;
 
     // Core Variables
     public GameObject cube;                    // The cube the player is currently on
     public GameObject allLevels;                // The parent empty GameObject containing all the levels
     public List<GameObject> levels;             // Ordered list of levels
-    private int level;                          // Current level
+    public int level;                          // Current level
 
     // Reset Variables
     public List<GameObject> resetDisables;      // List of all objects to disable on a reset
@@ -43,7 +46,7 @@ public class GameController : MonoBehaviour
     public TextMeshPro textTimer;           // UI Timer Text Object
 
     // Option objects and variables
-    public double timer;
+    public float timer;
     public bool hardcoreOn;
 
     //Camera variables
@@ -59,22 +62,24 @@ public class GameController : MonoBehaviour
     public AudioSource switchSound;
     public AudioSource nextLevelSound;
 
+    public int currentRunLevel;
+    public float currentRunTimer;
+
     private void Start()
     {
+
         inMenu = true;
         level = 0;
-        musicOn = true;
-        soundOn = true;
-        hardcoreOn = false;
-        SetCubeControl();
         LoadGame();
+        UpdateOptionsUI();
+        VersionText.text = "Build:" + Application.version;
+        SetCubeControl();
         if (musicOn)
         {
             music.time = 2;
             music.Play();
         }
 
-        UpdateOptionsUI();
     }
 
     void Update()
@@ -107,19 +112,18 @@ public class GameController : MonoBehaviour
         }
         if (level != 0)
         {
-
             timer += Time.deltaTime;
         }
     }
-    public void Rotate(string way) //Right: Z-, Left, Z+
+    public void Rotate(RotationController.Rotations way) //Right: Z-, Left, Z+
     {
         if(soundOn)
         {
             rotateSound.Play();
         }
-        rotationController.rotateDirection = way;                                        //Stores the rotation orientation
-        rotationController.rotateQueued = true;                                    //Tells the controller to start a rotation
-        rotationController.playerPOS = playerController.gameObject.transform.position;       //Stores the player position
+        rotationController.rotateDirection = way;                                           //Stores the rotation orientation
+        rotationController.rotateQueued = true;                                             //Tells the controller to start a rotation
+        rotationController.playerPOS = playerController.gameObject.transform.position;      //Stores the player position
     }
 
     public void NextLevel()
@@ -130,9 +134,16 @@ public class GameController : MonoBehaviour
             {
                 nextLevelSound.Play();
             }
+            rotationController.moveDirection = RotationController.MoveDirections.NextLevel;
             rotationController.moveQueued = true;
             level++;
             SetCubeControl();
+
+            if(!hardcoreOn)
+            {
+                PlayerPrefs.SetInt("currentlevel", level);
+                PlayerPrefs.SetFloat("currenttimer", timer);
+            }
             playerController.gameObject.SetActive(false);                     //Removes the player from view
         }
         else
@@ -163,7 +174,6 @@ public class GameController : MonoBehaviour
         {
             go.transform.rotation = new Quaternion();
         }
-        //textController.Init();
 
     }
 
@@ -181,8 +191,6 @@ public class GameController : MonoBehaviour
         SaveGame();
         UpdateOptionsUI();
     }
-
-    
 
     public void ResetLevels()
     {
@@ -235,10 +243,33 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetInt("hardcore", 0);
         }
-        PlayerPrefs.SetInt("language", LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale));
+        PlayerPrefs.SetInt("language", GetLocale());
     }
     public void LoadGame()
     {
+        if (PlayerPrefs.HasKey("music"))
+        {
+            if (PlayerPrefs.GetInt("music") == 1)
+            {
+                musicOn = true;
+            }
+            else
+            {
+                musicOn = false;
+            }
+        }
+        else
+        {
+            if (soundOn)
+            {
+                PlayerPrefs.SetInt("music", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("music", 0);
+            }
+        }
+        //-----------------------------------------------
         if (PlayerPrefs.HasKey("sounds"))
         {
             if (PlayerPrefs.GetInt("sounds") == 1)
@@ -287,11 +318,37 @@ public class GameController : MonoBehaviour
         //-----------------------------------------------
         if (PlayerPrefs.HasKey("language"))
         {
-            StartCoroutine(SetLocale(PlayerPrefs.GetInt("language")));
+            SetLocale(PlayerPrefs.GetInt("language"));
         }
         else
         {
-            PlayerPrefs.SetInt("language", LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale));
+            PlayerPrefs.SetInt("language", GetLocale());
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("maxlevel"))
+        {
+            //
+        }
+        else
+        {
+            PlayerPrefs.SetInt("maxlevel", 0);
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("currentlevel"))
+        {
+            currentRunLevel = PlayerPrefs.GetInt("currentlevel");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("currentlevel", 0);
+        }
+        if (PlayerPrefs.HasKey("currenttimer"))
+        {
+            currentRunTimer = PlayerPrefs.GetFloat("currenttimer");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("currenttimer", 0);
         }
     }
 
@@ -299,42 +356,56 @@ public class GameController : MonoBehaviour
     {
         if (locale == "english")
         {
-            StartCoroutine(SetLocale(0));
+            SetLocale(0);
         }
         if (locale == "french")
         {
-            StartCoroutine(SetLocale(1));
+            SetLocale(1);
         }
         if (locale == "german")
         {
-            StartCoroutine(SetLocale(2));
+            SetLocale(2);
         }
         if (locale == "polish")
         {
-            StartCoroutine(SetLocale(3));
+            SetLocale(3);
         }
         if (locale == "portuguese")
         {
-            StartCoroutine(SetLocale(4));
+            SetLocale(4);
         }
         if (locale == "russian")
         {
-            StartCoroutine(SetLocale(5));
+            SetLocale(5);
         }
         if (locale == "spanish")
         {
-            StartCoroutine(SetLocale(6));
+            SetLocale(6);
         }
     }
-    
-    IEnumerator SetLocale(int localeId)
+
+    public void SetLocale(int localeId)
     {
-        yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+    }
+
+    public int GetLocale()
+    {
+        return LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
     }
 
     public void PlayButton()
     {
+        PlayerPrefs.SetInt("currentlevel", 0);
+        PlayerPrefs.SetFloat("currenttimer", 0);
+        rotationController.SetLevel(0);
+        mainMenu.SetActive(false);
+        inMenu = false;
+    }
+    public void ContinueButton()
+    {
+        rotationController.SetLevel(currentRunLevel);
+        timer = PlayerPrefs.GetFloat("currenttimer");
         mainMenu.SetActive(false);
         inMenu = false;
     }
@@ -344,6 +415,7 @@ public class GameController : MonoBehaviour
         hardcoreOn = !hardcoreOn;
         
         UpdateOptionsUI();
+        SaveGame();
     }
 
     public void ToggleMusic()
@@ -359,11 +431,13 @@ public class GameController : MonoBehaviour
             music.Stop();
         }
         UpdateOptionsUI();
+        SaveGame();
     }
     public void ToggleSounds()
     {
         soundOn = !soundOn;
         UpdateOptionsUI();
+        SaveGame();
     }
 
     public void UpdateOptionsUI()
@@ -389,6 +463,14 @@ public class GameController : MonoBehaviour
             logo.SetActive(false);
             logoRed.SetActive(true);
         }
+        if (currentRunLevel == 0)
+        {
+            buttonContinue.SetActive(false);
+        }
+        else
+        {
+            buttonContinue.SetActive(true);
+        }
     }
 
     public void ToggleLanguage()
@@ -403,6 +485,8 @@ public class GameController : MonoBehaviour
             i++;
         }
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i];
+
+        SaveGame();
     }
 
     public void QuitGame()

@@ -24,7 +24,7 @@ public class TriggerController : MonoBehaviour
     public bool rotationbased;
     public bool playSound;
     public bool rotateCube;
-    public string rotateWay;
+    public bool clockwise;
 
 
     public void Trigger()
@@ -103,7 +103,14 @@ public class TriggerController : MonoBehaviour
             if(!rc.rotateQueued)
             {
                 rc.rotateQueued = true;
-                rc.rotateDirection = rotateWay;
+                if(clockwise)
+                {
+                    rc.rotateDirection = RotationController.Rotations.Clockwise;
+                }
+                else
+                {
+                    rc.rotateDirection = RotationController.Rotations.CounterClockwise;
+                }
             }
         }
     }

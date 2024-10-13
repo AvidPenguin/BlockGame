@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: Jogar
+    m_Localized: Nova corrida
     m_Metadata:
       m_Items: []
   - m_Id: 2
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7
-    m_Localized: Modo Normal
+    m_Localized: Modo normal
     m_Metadata:
       m_Items: []
   - m_Id: 8
@@ -240,6 +240,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 54
     m_Localized: Tempo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55
+    m_Localized: Continuar
     m_Metadata:
       m_Items: []
   references:

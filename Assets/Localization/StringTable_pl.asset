@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: "Gra\u0107"
+    m_Localized: Nowy bieg
     m_Metadata:
       m_Items: []
   - m_Id: 2
@@ -242,6 +242,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 54
     m_Localized: Czas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55
+    m_Localized: "Kontynuowa\u0107"
     m_Metadata:
       m_Items: []
   references:

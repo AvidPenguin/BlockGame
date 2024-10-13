@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class RotationController : MonoBehaviour
@@ -11,24 +12,30 @@ public class RotationController : MonoBehaviour
     public bool moveQueued;
     private readonly float moveSpeed = 0.5f;    // Has to be a divisible of 50 (1f ,0.5f etc)
     public bool isMoving;
-    public string moveDirection;
+    public MoveDirections moveDirection;
     public float moveProgress;
-    public int movesToDo;
 
     public bool rotateQueued;
     private readonly float rotateSpeed = 1.8f;  // Has to be a divisible of 90 (1f ,0.9f etc)
     public bool isRotating;
-    public string rotateDirection;
+    public Rotations rotateDirection;
     public float rotateProgress;
 
-    // Rotation triggering objects
     public GameObject doors;                    // The parent empty GameObject containing all the doors
-
     public Vector3 playerPOS;                  // Used for storing data during rotations
+
+    public enum MoveDirections
+    {
+        NextLevel,
+        PreviousLevel
+    }
+    public enum Rotations
+    {
+        Up, Down, Left, Right, Clockwise, CounterClockwise
+    }
 
     private void Start()
     {
-        movesToDo = 1;
         rotateQueued = false;
         moveQueued = false;
     }
@@ -37,18 +44,35 @@ public class RotationController : MonoBehaviour
     {
         if (moveQueued)
         {
-            isMoving = true;
-            gc.allLevels.transform.Translate(-moveSpeed, 0, 0);
-            moveProgress += moveSpeed;
-
-            if (moveProgress == (50 * movesToDo))
+            if (moveDirection == MoveDirections.NextLevel)
             {
-                moveQueued = false;
-                moveProgress = 0;
-                isMoving = false;
-                gc.playerController.transform.position = new Vector3(0, 5f, 0);      //Sets new position to player
-                gc.playerController.gameObject.SetActive(true);          //Reinstates the player to view
-                movesToDo = 1;
+                isMoving = true;
+                gc.allLevels.transform.Translate(-moveSpeed, 0, 0);
+                moveProgress += moveSpeed;
+
+                if (moveProgress == (50))
+                {
+                    moveQueued = false;
+                    moveProgress = 0;
+                    isMoving = false;
+                    gc.playerController.transform.position = new Vector3(0, 5f, 0);      //Sets new position to player
+                    gc.playerController.gameObject.SetActive(true);                     //Reinstates the player to view
+                }
+            }
+            if (moveDirection == MoveDirections.PreviousLevel)
+            {
+                isMoving = true;
+                gc.allLevels.transform.Translate(moveSpeed, 0, 0);
+                moveProgress += moveSpeed;
+
+                if (moveProgress == (50))
+                {
+                    moveQueued = false;
+                    moveProgress = 0;
+                    isMoving = false;
+                    gc.playerController.transform.position = new Vector3(0, 5f, 0);      //Sets new position to player
+                    gc.playerController.gameObject.SetActive(true);                     //Reinstates the player to view
+                }
             }
         }
 
@@ -56,67 +80,67 @@ public class RotationController : MonoBehaviour
         {
             isRotating = true;
 
-            if (rotateDirection == "right")
+            if (rotateDirection == Rotations.Right)
             {
                 gc.cube.transform.RotateAround(gc.cube.transform.position, Vector3.forward, rotateSpeed);
                 gc.playerController.transform.RotateAround(gc.cube.transform.position, Vector3.forward, rotateSpeed);
                 rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
-                    rotateQueued = false;                       //Ends rotation
-                    rotateProgress = 0;                         //Resets counter for next rotation
-                    isRotating = false;                         //Sets bool for rotation check
-                    playerPOS.x = -5f;                       //Moves player to new position
-                    gc.playerController.transform.position = playerPOS;      //Sets new position to player
+                    rotateQueued = false;                                   //Ends rotation
+                    rotateProgress = 0;                                     //Resets counter for next rotation
+                    isRotating = false;                                     //Sets bool for rotation check
+                    playerPOS.x = -5f;                                      //Moves player to new position
+                    gc.playerController.transform.position = playerPOS;     //Sets new position to player
                     gc.playerController.scaleRightRevertQueued = true;
                 }
             }
-            if (rotateDirection == "left")
+            if (rotateDirection == Rotations.Left)
             {
                 gc.cube.transform.RotateAround(gc.cube.transform.position, Vector3.back, rotateSpeed);
                 gc.playerController.transform.RotateAround(gc.cube.transform.position, Vector3.back, rotateSpeed);
                 rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
-                    rotateQueued = false;                       //Ends rotation
-                    rotateProgress = 0;                         //Resets counter for next rotation
-                    isRotating = false;                         //Sets bool for rotation check
-                    playerPOS.x = 5f;                       //Moves player to new position
-                    gc.playerController.transform.position = playerPOS;      //Sets new position to player
+                    rotateQueued = false;                                   //Ends rotation
+                    rotateProgress = 0;                                     //Resets counter for next rotation
+                    isRotating = false;                                     //Sets bool for rotation check
+                    playerPOS.x = 5f;                                       //Moves player to new position
+                    gc.playerController.transform.position = playerPOS;     //Sets new position to player
                     gc.playerController.scaleLeftRevertQueued = true;
                 }
             }
-            if (rotateDirection == "down")
+            if (rotateDirection == Rotations.Down)
             {
                 gc.cube.transform.RotateAround(gc.cube.transform.position, Vector3.right, rotateSpeed);
                 gc.playerController.transform.RotateAround(gc.cube.transform.position, Vector3.right, rotateSpeed);
                 rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
-                    rotateQueued = false;                       //Ends rotation
-                    rotateProgress = 0;                         //Resets counter for next rotation
-                    isRotating = false;                         //Sets bool for rotation check
-                    playerPOS.z = 5f;                       //Moves player to new position
-                    gc.playerController.transform.position = playerPOS;      //Sets new position to player
+                    rotateQueued = false;                                   //Ends rotation
+                    rotateProgress = 0;                                     //Resets counter for next rotation
+                    isRotating = false;                                     //Sets bool for rotation check
+                    playerPOS.z = 5f;                                       //Moves player to new position
+                    gc.playerController.transform.position = playerPOS;     //Sets new position to player
                     gc.playerController.scaleDownRevertQueued = true;
                 }
             }
-            if (rotateDirection == "up")
+            if (rotateDirection == Rotations.Up)
             {
                 gc.cube.transform.RotateAround(gc.cube.transform.position, Vector3.left, rotateSpeed);
                 gc.playerController.transform.RotateAround(gc.cube.transform.position, Vector3.left, rotateSpeed);
                 rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
-                    rotateQueued = false;                       //Ends rotation
-                    rotateProgress = 0;                         //Resets counter for next rotation
-                    isRotating = false;                         //Sets bool for rotation check
-                    playerPOS.z = -5f;                          //Moves player to new position
-                    gc.playerController.transform.position = playerPOS;      //Sets new position to player
+                    rotateQueued = false;                                   //Ends rotation
+                    rotateProgress = 0;                                     //Resets counter for next rotation
+                    isRotating = false;                                     //Sets bool for rotation check
+                    playerPOS.z = -5f;                                      //Moves player to new position
+                    gc.playerController.transform.position = playerPOS;     //Sets new position to player
                     gc.playerController.scaleUpRevertQueued = true;
                 }
             }
-            if (rotateDirection == "clockwise")
+            if (rotateDirection == Rotations.Clockwise)
             {
                 doors.SetActive(false);
                 gc.cube.transform.RotateAround(gc.cube.transform.position, Vector3.up, rotateSpeed);
@@ -124,13 +148,13 @@ public class RotationController : MonoBehaviour
                 rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
-                    rotateQueued = false;                       //Ends rotation
-                    rotateProgress = 0;                         //Resets counter for next rotation
+                    rotateQueued = false;                                   //Ends rotation
+                    rotateProgress = 0;                                     //Resets counter for next rotation
                     isRotating = false;
                     doors.SetActive(true);
                 }
             }
-            if (rotateDirection == "counterclockwise")
+            if (rotateDirection == Rotations.CounterClockwise)
             {
                 doors.SetActive(false);
                 gc.cube.transform.RotateAround(gc.cube.transform.position, Vector3.down, rotateSpeed);
@@ -138,8 +162,8 @@ public class RotationController : MonoBehaviour
                 rotateProgress += rotateSpeed;
                 if (rotateProgress >= 90)
                 {
-                    rotateQueued = false;                       //Ends rotation
-                    rotateProgress = 0;                         //Resets counter for next rotation
+                    rotateQueued = false;                                   //Ends rotation
+                    rotateProgress = 0;                                     //Resets counter for next rotation
                     isRotating = false;
                     doors.SetActive(true);
                 }
@@ -147,14 +171,23 @@ public class RotationController : MonoBehaviour
         }
     }
 
-    public void Rotate(string direction) //Right: Z-, Left, Z+
+    public void Rotate(Rotations direction)
     {
         if (gc.soundOn)
         {
             gc.rotateSound.Play();
         }
         rotateDirection = direction;                                        //Stores the rotation orientation
-        rotateQueued = true;                                             //Tells the controller to start a rotation
+        rotateQueued = true;                                                //Tells the controller to start a rotation
         playerPOS = pc.gameObject.transform.position;                       //Stores the player position
+    }
+
+    public void SetLevel(int i)
+    {
+        Vector3 temp = gc.allLevels.transform.position;
+        temp.x = -(i * 50);
+        gc.allLevels.transform.position = temp;
+        gc.level = i;
+        gc.SetCubeControl();
     }
 }

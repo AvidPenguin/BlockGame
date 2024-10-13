@@ -235,6 +235,10 @@ MonoBehaviour:
     m_Key: timer
     m_Metadata:
       m_Items: []
+  - m_Id: 55
+    m_Key: continue
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

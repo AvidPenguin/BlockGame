@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: Spielen
+    m_Localized: Neuer Lauf
     m_Metadata:
       m_Items: []
   - m_Id: 2
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 38
-    m_Localized: Oh, erkundest du gern?
+    m_Localized: Oh, du erkundest gerne?
     m_Metadata:
       m_Items: []
   - m_Id: 39
@@ -208,8 +208,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 47
-    m_Localized: Nach einer Rotation sind Sie immer in Sicherheit, wenn Sie sich
-      nicht bewegen
+    m_Localized: Nach einer Rotation sind Sie immer sicher, wenn Sie sich nicht bewegen
     m_Metadata:
       m_Items: []
   - m_Id: 48
@@ -240,6 +239,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 54
     m_Localized: Zeit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55
+    m_Localized: Weitermachen
     m_Metadata:
       m_Items: []
   references:

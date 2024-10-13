@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: Jouer
+    m_Localized: Nouvelle course
     m_Metadata:
       m_Items: []
   - m_Id: 2
@@ -87,7 +87,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 18
-    m_Localized: Conception de niveau
+    m_Localized: Conception de niveaux
     m_Metadata:
       m_Items: []
   - m_Id: 19
@@ -239,6 +239,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 54
     m_Localized: Temps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55
+    m_Localized: Continuer
     m_Metadata:
       m_Items: []
   references:

@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: Jugar
+    m_Localized: "Nueva ejecuci\xF3n"
     m_Metadata:
       m_Items: []
   - m_Id: 2
@@ -107,7 +107,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 23
-    m_Localized: "Dir\xEDgete al borde de un cubo para viajar hacia ese lado. "
+    m_Localized: "Dir\xEDgete al borde de un cubo para viajar a ese lado. "
     m_Metadata:
       m_Items: []
   - m_Id: 24
@@ -155,7 +155,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 35
-    m_Localized: "Sin embargo, los interruptores pueden hacer mucho m\xE1s."
+    m_Localized: "Sin embargo, los interruptores pueden hacer mucho m\xE1s"
     m_Metadata:
       m_Items: []
   - m_Id: 36
@@ -238,6 +238,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 54
     m_Localized: Tiempo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55
+    m_Localized: Continuar
     m_Metadata:
       m_Items: []
   references:
