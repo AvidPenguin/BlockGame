@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!gameController.inMenu)
+        if (!gameController.mainMenu.activeSelf && !gameController.pauseMenu.activeSelf)
         {
             axisX = Input.GetAxisRaw("Horizontal");
             axisZ = Input.GetAxisRaw("Vertical");
@@ -63,12 +63,7 @@ public class PlayerController : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause"))
             {
-                PlayerPrefs.SetFloat("currenttimer", gameController.timer);
-                gameController.mainMenu.SetActive(true);
-                gameController.inMenu = true;
-                gameController.ResetLevels();
-                gameController.rotationController.SetLevel(0);
-                gameController.UpdateOptionsUI();
+                gameController.PauseMenu();
             }
         }
         
@@ -224,7 +219,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (gameController.hardcoreOn)
                 {
-                    gameController.ResetLevels();
+                    gameController.ResetGame();
                 }
                 else
                 {

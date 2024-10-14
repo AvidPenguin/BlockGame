@@ -15,17 +15,24 @@ public class GameController : MonoBehaviour
     public RotationController rotationController;
 
     // Menu Elements
-    public bool inMenu;
     public GameObject mainMenu;
+    public GameObject pauseMenu;
     public GameObject logo;
     public GameObject logoRed;
+    public GameObject logoPause;
+    public GameObject logoRedPause;
     public TextMeshProUGUI OptMusicOn;
     public TextMeshProUGUI OptMusicOff;
     public TextMeshProUGUI OptSoundsOn;
     public TextMeshProUGUI OptSoundsOff;
     public TextMeshProUGUI OptHardcoreOn;
     public TextMeshProUGUI OptHardcoreOff;
+    public TextMeshProUGUI OptMusicOnPause;
+    public TextMeshProUGUI OptMusicOffPause;
+    public TextMeshProUGUI OptSoundsOnPause;
+    public TextMeshProUGUI OptSoundsOffPause;
     public GameObject menuBackground;
+    public GameObject menuBackgroundPause;
     public TextMeshProUGUI VersionText;
     public GameObject buttonPlay;
     public GameObject buttonContinue;
@@ -35,6 +42,7 @@ public class GameController : MonoBehaviour
     public GameObject allLevels;                // The parent empty GameObject containing all the levels
     public List<GameObject> levels;             // Ordered list of levels
     public int level;                          // Current level
+    public int maxLevel;
 
     // Reset Variables
     public List<GameObject> resetDisables;      // List of all objects to disable on a reset
@@ -42,8 +50,8 @@ public class GameController : MonoBehaviour
     public List<GameObject> resetRotates;       // List of all objects to rotate on a reset
 
     // In Game UI Objects
-    public TextMeshPro textLevel;           // UI Level Text Object
-    public TextMeshPro textTimer;           // UI Timer Text Object
+    public TextMeshProUGUI textLevel;           // UI Level Text Object
+    public TextMeshProUGUI textTimer;           // UI Timer Text Object
 
     // Option objects and variables
     public float timer;
@@ -67,8 +75,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-
-        inMenu = true;
         level = 0;
         LoadGame();
         UpdateOptionsUI();
@@ -137,10 +143,16 @@ public class GameController : MonoBehaviour
             rotationController.moveDirection = RotationController.MoveDirections.NextLevel;
             rotationController.moveQueued = true;
             level++;
+            if(level > maxLevel) //Player reaches a new highest level
+            {
+                maxLevel = level;
+                PlayerPrefs.SetInt("maxlevel", level);
+            }
             SetCubeControl();
 
             if(!hardcoreOn)
             {
+                currentRunLevel = level;
                 PlayerPrefs.SetInt("currentlevel", level);
                 PlayerPrefs.SetFloat("currenttimer", timer);
             }
@@ -159,9 +171,12 @@ public class GameController : MonoBehaviour
         cube = levels[level];
     }
 
-    public void ResetLevel()
+    public void ResetLevel() //Resets all levels, but keeps player in game
     {
-        cube.transform.rotation = new Quaternion();
+        foreach (GameObject go in levels)
+        {
+            go.transform.rotation = new Quaternion();
+        }
         foreach (GameObject go in resetDisables)
         {
             go.SetActive(false);
@@ -192,7 +207,7 @@ public class GameController : MonoBehaviour
         UpdateOptionsUI();
     }
 
-    public void ResetLevels()
+    public void ResetGame() //Resets all levels, and clears run progress
     {
         level = 0;
         allLevels.transform.position = new Vector3();
@@ -213,8 +228,13 @@ public class GameController : MonoBehaviour
             go.transform.rotation = new Quaternion();
         }
         SetCubeControl();
-        //textController.Init();
         timer = 0;
+        currentRunLevel = 0;
+        currentRunTimer = 0;
+        PlayerPrefs.SetFloat("currenttimer", 0);
+        PlayerPrefs.SetInt("currentlevel", 0);
+        UpdateOptionsUI();
+        mainMenu.SetActive(true);
     }
 
     public void SaveGame()
@@ -327,7 +347,7 @@ public class GameController : MonoBehaviour
         //-----------------------------------------------
         if (PlayerPrefs.HasKey("maxlevel"))
         {
-            //
+            maxLevel = PlayerPrefs.GetInt("maxlevel");
         }
         else
         {
@@ -342,6 +362,7 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetInt("currentlevel", 0);
         }
+        //-----------------------------------------------
         if (PlayerPrefs.HasKey("currenttimer"))
         {
             currentRunTimer = PlayerPrefs.GetFloat("currenttimer");
@@ -400,14 +421,15 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetFloat("currenttimer", 0);
         rotationController.SetLevel(0);
         mainMenu.SetActive(false);
-        inMenu = false;
+        Time.timeScale = 1;
     }
+
     public void ContinueButton()
     {
-        rotationController.SetLevel(currentRunLevel);
+        rotationController.SetLevel(PlayerPrefs.GetInt("currentlevel"));
         timer = PlayerPrefs.GetFloat("currenttimer");
         mainMenu.SetActive(false);
-        inMenu = false;
+        Time.timeScale = 1;
     }
 
     public void ToggleHardcore()
@@ -446,24 +468,34 @@ public class GameController : MonoBehaviour
         OptMusicOff.gameObject.SetActive(!musicOn);
         OptSoundsOn.gameObject.SetActive(soundOn);
         OptSoundsOff.gameObject.SetActive(!soundOn);
+        OptMusicOnPause.gameObject.SetActive(musicOn);
+        OptMusicOffPause.gameObject.SetActive(!musicOn);
+        OptSoundsOnPause.gameObject.SetActive(soundOn);
+        OptSoundsOffPause.gameObject.SetActive(!soundOn);
         OptHardcoreOn.gameObject.SetActive(hardcoreOn);
         OptHardcoreOff.gameObject.SetActive(!hardcoreOn);
         
         if (!hardcoreOn)
         {
             menuBackground.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
+            menuBackgroundPause.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
             cam.backgroundColor = new Color32(67, 67, 106, 255);
             logo.SetActive(true);
             logoRed.SetActive(false);
+            logoPause.SetActive(true);
+            logoRedPause.SetActive(false);
         }
         else
         {
             menuBackground.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
+            menuBackgroundPause.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
             cam.backgroundColor = new Color32(106, 67, 67, 255);
             logo.SetActive(false);
             logoRed.SetActive(true);
+            logoPause.SetActive(false);
+            logoRedPause.SetActive(true);
         }
-        if (currentRunLevel == 0)
+        if (currentRunLevel == 0 || hardcoreOn)
         {
             buttonContinue.SetActive(false);
         }
@@ -497,6 +529,43 @@ public class GameController : MonoBehaviour
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #endif
+    }
+
+    public void PauseMenu()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void Restart()
+    {
+        level = 0;
+        allLevels.transform.position = new Vector3();
+        ResetLevel();
+        SetCubeControl();
+        timer = 0;
+        currentRunLevel = 0;
+        currentRunTimer = 0;
+        PlayerPrefs.SetFloat("currenttimer", 0);
+        PlayerPrefs.SetInt("currentlevel", 0);
+        UpdateOptionsUI();
+        Resume();
+    }
+
+    public void MainMenu()
+    {
+        PlayerPrefs.SetFloat("currenttimer", timer);
+        level = 0;
+        timer = 0;
+        ResetLevel();
+        UpdateOptionsUI();
+        pauseMenu.SetActive(false);
+        mainMenu.SetActive(true);
     }
 
     [SerializeField]

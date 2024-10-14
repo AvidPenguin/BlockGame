@@ -248,6 +248,10 @@ MonoBehaviour:
     m_Localized: "Kontynuowa\u0107"
     m_Metadata:
       m_Items: []
+  - m_Id: 56
+    m_Localized: Uruchom ponownie
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

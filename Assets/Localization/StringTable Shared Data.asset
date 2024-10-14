@@ -239,6 +239,10 @@ MonoBehaviour:
     m_Key: continue
     m_Metadata:
       m_Items: []
+  - m_Id: 56
+    m_Key: restart
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

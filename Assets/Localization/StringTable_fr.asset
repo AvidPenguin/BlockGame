@@ -87,7 +87,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 18
-    m_Localized: Conception de niveaux
+    m_Localized: Conception de niveau
     m_Metadata:
       m_Items: []
   - m_Id: 19
@@ -187,7 +187,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 43
-    m_Localized: "Apr\xE8s tout, un cube est un objet tridimensionnel"
+    m_Localized: "Apr\xE8s tout, un cube est un objet en trois dimensions"
     m_Metadata:
       m_Items: []
   - m_Id: 44
@@ -243,6 +243,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 55
     m_Localized: Continuer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56
+    m_Localized: "Red\xE9marrage"
     m_Metadata:
       m_Items: []
   references:

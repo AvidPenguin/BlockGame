@@ -246,6 +246,10 @@ MonoBehaviour:
     m_Localized: Continuar
     m_Metadata:
       m_Items: []
+  - m_Id: 56
+    m_Localized: Reiniciar
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
