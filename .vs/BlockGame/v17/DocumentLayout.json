@@ -48,7 +48,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\RotationController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\RotationController.cs",
               "RelativeToolTip": "Assets\\Scripts\\RotationController.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAIA7wD4AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAYwLcAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T19:02:35.008Z",
               "EditorCaption": ""
@@ -61,7 +61,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
-              "ViewState": "AgIAALwAAAAAAAAAAAAWwN8AAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAB4BAAAAAAAAAADwv+oAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T05:53:06.693Z",
               "EditorCaption": ""
@@ -74,7 +74,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameController.cs",
               "ToolTip": "C:\\Users\\Dan\\BlockGame\\Assets\\Scripts\\GameController.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameController.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAYwA4BAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAI8BAAAAAAAAAAAIwMABAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T06:02:39.93Z",
               "EditorCaption": ""
@@ -113,8 +113,7 @@
               "RelativeToolTip": "Assets\\Scripts\\TriggerController.cs",
               "ViewState": "AgIAADkAAAAAAAAAAAAWwFAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-04T00:39:20.123Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-04T00:39:20.123Z"
             },
             {
               "$type": "Document",

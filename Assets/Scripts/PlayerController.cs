@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
                 scaleUpQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate(RotationController.Rotations.Up);
+                gameController.rotationController.Rotate(RotationController.Rotations.Up);
             }
         }
         else if (scaleUpRevertQueued)
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
                 scaleDownQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate(RotationController.Rotations.Down);
+                gameController.rotationController.Rotate(RotationController.Rotations.Down);
             }
         }
         else if (scaleDownRevertQueued)
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
                 scaleLeftQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate(RotationController.Rotations.Left);
+                gameController.rotationController.Rotate(RotationController.Rotations.Left);
             }
         }
         else if (scaleLeftRevertQueued)
@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
                 scaleRightQueued = false;
                 scaleProgress = 0;
                 isScaling = false;
-                gameController.Rotate(RotationController.Rotations.Right);
+                gameController.rotationController.Rotate(RotationController.Rotations.Right);
             }
         }
         else if (scaleRightRevertQueued)
@@ -231,6 +231,8 @@ public class PlayerController : MonoBehaviour
                 isReviving = true;
                 isDying = false;
                 scaleProgress = 0;
+                PlayerPrefs.SetInt("totaldeaths", PlayerPrefs.GetInt("totaldeaths") + 1);
+                PlayerPrefs.SetInt("currentdeaths", PlayerPrefs.GetInt("currentdeaths") + 1);
             }
         }
         if (isReviving)

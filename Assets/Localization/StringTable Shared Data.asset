@@ -243,6 +243,22 @@ MonoBehaviour:
     m_Key: restart
     m_Metadata:
       m_Items: []
+  - m_Id: 57
+    m_Key: main menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58
+    m_Key: complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59
+    m_Key: deaths
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60
+    m_Key: rotations
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -20,26 +20,38 @@ public class GameController : MonoBehaviour
 
     // Menu Elements
     public GameObject mainMenu;
-    public GameObject pauseMenu;
+    public GameObject mainMenuBG;
     public GameObject logo;
     public GameObject logoRed;
-    public GameObject logoPause;
-    public GameObject logoRedPause;
     public TextMeshProUGUI OptMusicOn;
     public TextMeshProUGUI OptMusicOff;
     public TextMeshProUGUI OptSoundsOn;
     public TextMeshProUGUI OptSoundsOff;
     public TextMeshProUGUI OptHardcoreOn;
     public TextMeshProUGUI OptHardcoreOff;
+    public TextMeshProUGUI VersionText;
+    public GameObject buttonPlay;
+    public GameObject buttonContinue;
+
+    // Pause Menu Elements
+    public GameObject pauseMenu;
+    public GameObject pauseMenuBG;
+    public GameObject logoPause;
+    public GameObject logoRedPause;
     public TextMeshProUGUI OptMusicOnPause;
     public TextMeshProUGUI OptMusicOffPause;
     public TextMeshProUGUI OptSoundsOnPause;
     public TextMeshProUGUI OptSoundsOffPause;
-    public GameObject menuBackground;
-    public GameObject menuBackgroundPause;
-    public TextMeshProUGUI VersionText;
-    public GameObject buttonPlay;
-    public GameObject buttonContinue;
+
+    // Victory Screen Elements
+    public GameObject victoryMenu;
+    public GameObject victoryMenuBG;
+    public GameObject logoVictory;
+    public GameObject logoRedVictory;
+    public TextMeshProUGUI resultTime;
+    public TextMeshProUGUI resultDeaths;
+    public TextMeshProUGUI resultRotations;
+
 
     // Core Variables
     public GameObject cube;                    // The cube the player is currently on
@@ -47,38 +59,33 @@ public class GameController : MonoBehaviour
     public List<GameObject> levels;             // Ordered list of levels
     public int level = 0;                          // Current level
     public int maxLevel;
+    public float timer;
+    public Camera cam;
 
     // Reset Variables
     public List<GameObject> resetDisables;      // List of all objects to disable on a reset
     public List<GameObject> resetEnables;       // List of all objects to enable on a reset
     public List<GameObject> resetRotates;       // List of all objects to rotate on a reset
 
-    // In Game UI Objects
+    // In-Game UI Objects
     public TextMeshProUGUI textLevel;           // UI Level Text Object
     public TextMeshProUGUI textTimer;           // UI Timer Text Object
 
     // Option objects and variables
-    public float timer;
     public bool hardcoreOn = false;
-
-    //Camera variables
-    public Camera cam;
-    public bool camFinishedMove;                // Used for FOV Sliding effect on launch
-
-
-    // Audio objects
     public bool musicOn = true;
     public bool soundOn = true;
+
+    // Audio objects
     public AudioSource music;
     public AudioSource rotateSound;
     public AudioSource switchSound;
     public AudioSource nextLevelSound;
 
-    public int currentRunLevel;
-    public float currentRunTimer;
 
     private void Start()
     {
+        cam = FindObjectOfType<Camera>();
         VersionText.text = "Build:" + Application.version;
         LoadData();
         UpdateUI();
@@ -107,35 +114,11 @@ public class GameController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!camFinishedMove)
-        {
-            if (cam.fieldOfView <= 70)
-            {
-                cam.fieldOfView += 0.1f;
-            }
-            else
-            {
-                camFinishedMove = true;
-                playerController.canMove = true;
-            }
-        }
         if (level != 0)
         {
             timer += Time.deltaTime;
         }
     }
-
-    public void Rotate(RotationController.Rotations way) //Right: Z-, Left, Z+
-    {
-        if(soundOn)
-        {
-            rotateSound.Play();
-        }
-        rotationController.rotateDirection = way;                                           //Stores the rotation orientation
-        rotationController.rotateQueued = true;                                             //Tells the controller to start a rotation
-        rotationController.playerPOS = playerController.gameObject.transform.position;      //Stores the player position
-    }
-
     public void ResetLevels() //Resets Current Level (Does all but it doesn't matter)
     {
         foreach (GameObject go in levels)
@@ -251,22 +234,34 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("maxlevel", 0);
         }
         //-----------------------------------------------
-        if (PlayerPrefs.HasKey("currentlevel"))
-        {
-            currentRunLevel = PlayerPrefs.GetInt("currentlevel");
-        }
-        else
+        if (!PlayerPrefs.HasKey("currentlevel"))
         {
             PlayerPrefs.SetInt("currentlevel", 0);
         }
         //-----------------------------------------------
-        if (PlayerPrefs.HasKey("currenttimer"))
-        {
-            currentRunTimer = PlayerPrefs.GetFloat("currenttimer");
-        }
-        else
+        if (!PlayerPrefs.HasKey("currenttimer"))
         {
             PlayerPrefs.SetFloat("currenttimer", 0);
+        }
+        //-----------------------------------------------
+        if (!PlayerPrefs.HasKey("currentdeaths"))
+        {
+            PlayerPrefs.SetInt("currentdeaths", 0);
+        }
+        //-----------------------------------------------
+        if (!PlayerPrefs.HasKey("currentrotations"))
+        {
+            PlayerPrefs.SetInt("currentrotations", 0);
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("totaldeaths"))
+        {
+            PlayerPrefs.SetInt("totaldeaths", 0);
+        }
+        //-----------------------------------------------
+        if (PlayerPrefs.HasKey("totalrotations"))
+        {
+            PlayerPrefs.SetInt("totalrotations", 0);
         }
     }
 
@@ -285,8 +280,8 @@ public class GameController : MonoBehaviour
     public void ButtonContinue()
     {
         ResetLevelsAndPlayer();
-        rotationController.SetLevel(currentRunLevel);
-        timer = currentRunTimer;
+        rotationController.SetLevel(PlayerPrefs.GetInt("currentlevel"));
+        timer = PlayerPrefs.GetFloat("currenttimer");
         MenuToGame();
     }
 
@@ -350,25 +345,31 @@ public class GameController : MonoBehaviour
         
         if (!hardcoreOn)
         {
-            menuBackground.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
-            menuBackgroundPause.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
+            mainMenuBG.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
+            pauseMenuBG.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
+            victoryMenuBG.GetComponent<Image>().color = new Color32(67, 67, 106, 255);
             cam.backgroundColor = new Color32(67, 67, 106, 255);
             logo.SetActive(true);
             logoRed.SetActive(false);
             logoPause.SetActive(true);
             logoRedPause.SetActive(false);
+            logoVictory.SetActive(true);
+            logoRedVictory.SetActive(false);
         }
         else
         {
-            menuBackground.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
-            menuBackgroundPause.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
+            mainMenuBG.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
+            pauseMenuBG.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
+            victoryMenuBG.GetComponent<Image>().color = new Color32(106, 67, 67, 255);
             cam.backgroundColor = new Color32(106, 67, 67, 255);
             logo.SetActive(false);
             logoRed.SetActive(true);
             logoPause.SetActive(false);
             logoRedPause.SetActive(true);
+            logoVictory.SetActive(false);
+            logoRedVictory.SetActive(true);
         }
-        if (currentRunLevel == 0 || hardcoreOn)
+        if (PlayerPrefs.GetInt("currentlevel") == 0 || hardcoreOn)
         {
             buttonContinue.SetActive(false);
         }
@@ -430,7 +431,11 @@ public class GameController : MonoBehaviour
             if (soundOn){nextLevelSound.Play();}                                                // Plays next level sound effect
             rotationController.moveDirection = RotationController.MoveDirections.NextLevel;     // Tells the RC to move to the next level
             rotationController.moveQueued = true;                                               // Starts the RC move process
-        } else { }                                                                              // No more levels - Crash detection
+        }
+        else                                                                                    // No more levels
+        {
+            GameToVictory();
+        }
     }
 
     public void SaveProgress()
@@ -442,8 +447,6 @@ public class GameController : MonoBehaviour
         }
         if (!hardcoreOn)
         {
-            currentRunLevel = level;
-            currentRunTimer = timer;
             PlayerPrefs.SetInt("currentlevel", level);
             PlayerPrefs.SetFloat("currenttimer", timer);
         }
@@ -471,10 +474,10 @@ public class GameController : MonoBehaviour
 
     public void ClearProgress()
     {
-        currentRunTimer = 0;
-        currentRunLevel = 0;
         PlayerPrefs.SetFloat("currenttimer", 0);
         PlayerPrefs.SetInt("currentlevel", 0);
+        PlayerPrefs.SetInt("currentdeaths", 0);
+        PlayerPrefs.SetInt("currentrotations", 0);
     }
 
     public void Hover()
@@ -507,4 +510,29 @@ public class GameController : MonoBehaviour
         ResetLevelsAndPlayer();
         PauseToMenu();
     }
+
+    public void GameToVictory()
+    {
+        Time.timeScale = 0;
+        resultTime.text = timer.ToString("N1");
+        resultDeaths.text = PlayerPrefs.GetInt("currentdeaths").ToString();
+        resultRotations.text = PlayerPrefs.GetInt("currentrotations").ToString();
+        victoryMenu.SetActive(true);
+        ResetLevelsAndPlayer();
+        ClearProgress();
+    }
+
+    public void VictoryToMenu()
+    {
+        UpdateUI();
+        victoryMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+
+    public void VictoryToGame()
+    {
+        victoryMenu.SetActive(false);
+        ButtonNewRun();
+    }
+
 }

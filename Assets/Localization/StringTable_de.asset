@@ -249,6 +249,22 @@ MonoBehaviour:
     m_Localized: Neustart
     m_Metadata:
       m_Items: []
+  - m_Id: 57
+    m_Localized: "Hauptmen\xFC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58
+    m_Localized: "Ausf\xFChrung abgeschlossen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59
+    m_Localized: "Todesf\xE4lle"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60
+    m_Localized: Rotationen
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

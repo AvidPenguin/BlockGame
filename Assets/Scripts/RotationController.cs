@@ -99,6 +99,7 @@ public class RotationController : MonoBehaviour
                     playerPOS.x = -5f;                                      //Moves player to new position
                     gc.playerController.transform.position = playerPOS;     //Sets new position to player
                     gc.playerController.scaleRightRevertQueued = true;
+                    
                 }
             }
             if (rotateDirection == Rotations.Left)
@@ -179,6 +180,8 @@ public class RotationController : MonoBehaviour
 
     public void Rotate(Rotations direction)
     {
+        PlayerPrefs.SetInt("totalrotations", PlayerPrefs.GetInt("totalrotations") + 1);
+        PlayerPrefs.SetInt("currentrotations", PlayerPrefs.GetInt("currentrotations") + 1);
         if (gc.soundOn)
         {
             gc.rotateSound.Play();

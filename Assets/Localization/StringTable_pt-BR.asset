@@ -250,6 +250,22 @@ MonoBehaviour:
     m_Localized: Reiniciar
     m_Metadata:
       m_Items: []
+  - m_Id: 57
+    m_Localized: Menu Principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58
+    m_Localized: "Execu\xE7\xE3o conclu\xEDda"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59
+    m_Localized: Mortes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60
+    m_Localized: "Rota\xE7\xF5es"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

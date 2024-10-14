@@ -246,6 +246,22 @@ MonoBehaviour:
     m_Localized: Restart
     m_Metadata:
       m_Items: []
+  - m_Id: 57
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58
+    m_Localized: Run Complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59
+    m_Localized: Deaths
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60
+    m_Localized: Rotations
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
