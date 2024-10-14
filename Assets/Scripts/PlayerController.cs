@@ -219,11 +219,13 @@ public class PlayerController : MonoBehaviour
             {
                 if (gameController.hardcoreOn)
                 {
-                    gameController.ResetGame();
+                    gameController.ClearProgress();
+                    gameController.ResetLevelsAndPlayer();
+                    gameController.GameToMenu();
                 }
                 else
                 {
-                    gameController.ResetLevel();
+                    gameController.ResetLevels();
                 }
                 this.transform.position = new Vector3(0, 5, 0);
                 isReviving = true;

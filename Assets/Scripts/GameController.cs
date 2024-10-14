@@ -10,6 +10,10 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+
+
+    [SerializeField]
+    private Selectable selectable = null;
     // Controllers
     public PlayerController playerController;
     public RotationController rotationController;
@@ -41,7 +45,7 @@ public class GameController : MonoBehaviour
     public GameObject cube;                    // The cube the player is currently on
     public GameObject allLevels;                // The parent empty GameObject containing all the levels
     public List<GameObject> levels;             // Ordered list of levels
-    public int level;                          // Current level
+    public int level = 0;                          // Current level
     public int maxLevel;
 
     // Reset Variables
@@ -55,7 +59,7 @@ public class GameController : MonoBehaviour
 
     // Option objects and variables
     public float timer;
-    public bool hardcoreOn;
+    public bool hardcoreOn = false;
 
     //Camera variables
     public Camera cam;
@@ -63,8 +67,8 @@ public class GameController : MonoBehaviour
 
 
     // Audio objects
-    public bool musicOn;
-    public bool soundOn;
+    public bool musicOn = true;
+    public bool soundOn = true;
     public AudioSource music;
     public AudioSource rotateSound;
     public AudioSource switchSound;
@@ -75,11 +79,10 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        level = 0;
-        LoadGame();
-        UpdateOptionsUI();
         VersionText.text = "Build:" + Application.version;
-        SetCubeControl();
+        LoadData();
+        UpdateUI();
+
         if (musicOn)
         {
             music.time = 2;
@@ -121,6 +124,7 @@ public class GameController : MonoBehaviour
             timer += Time.deltaTime;
         }
     }
+
     public void Rotate(RotationController.Rotations way) //Right: Z-, Left, Z+
     {
         if(soundOn)
@@ -132,46 +136,7 @@ public class GameController : MonoBehaviour
         rotationController.playerPOS = playerController.gameObject.transform.position;      //Stores the player position
     }
 
-    public void NextLevel()
-    {
-        if (level<levels.Count-1)
-        {
-            if (soundOn)
-            {
-                nextLevelSound.Play();
-            }
-            rotationController.moveDirection = RotationController.MoveDirections.NextLevel;
-            rotationController.moveQueued = true;
-            level++;
-            if(level > maxLevel) //Player reaches a new highest level
-            {
-                maxLevel = level;
-                PlayerPrefs.SetInt("maxlevel", level);
-            }
-            SetCubeControl();
-
-            if(!hardcoreOn)
-            {
-                currentRunLevel = level;
-                PlayerPrefs.SetInt("currentlevel", level);
-                PlayerPrefs.SetFloat("currenttimer", timer);
-            }
-            playerController.gameObject.SetActive(false);                     //Removes the player from view
-        }
-        else
-        {
-            //No more levels
-        }
-        
-
-    }
-
-    public void SetCubeControl()
-    {
-        cube = levels[level];
-    }
-
-    public void ResetLevel() //Resets all levels, but keeps player in game
+    public void ResetLevels() //Resets Current Level (Does all but it doesn't matter)
     {
         foreach (GameObject go in levels)
         {
@@ -189,29 +154,14 @@ public class GameController : MonoBehaviour
         {
             go.transform.rotation = new Quaternion();
         }
-
     }
 
-    public void OptionChange(string option)
-    {
-        if (option == "sounds")
-        {
-            soundOn = !soundOn;
-        }
-        if (option == "hardcore")
-        {
-            hardcoreOn = !hardcoreOn;
-        }
-
-        SaveGame();
-        UpdateOptionsUI();
-    }
-
-    public void ResetGame() //Resets all levels, and clears run progress
+    public void ResetLevelsAndPlayer() //Resets all levels and sets player to level 1
     {
         level = 0;
+        cube = levels[level];
         allLevels.transform.position = new Vector3();
-        foreach(GameObject go in levels)
+        foreach (GameObject go in levels)
         {
             go.transform.rotation = new Quaternion();
         }
@@ -227,45 +177,10 @@ public class GameController : MonoBehaviour
         {
             go.transform.rotation = new Quaternion();
         }
-        SetCubeControl();
-        timer = 0;
-        currentRunLevel = 0;
-        currentRunTimer = 0;
-        PlayerPrefs.SetFloat("currenttimer", 0);
-        PlayerPrefs.SetInt("currentlevel", 0);
-        UpdateOptionsUI();
-        mainMenu.SetActive(true);
+        playerController.transform.position = new Vector3(0, 5f, 0);
     }
 
-    public void SaveGame()
-    {
-        if (musicOn)
-        {
-            PlayerPrefs.SetInt("music", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("music", 0);
-        }
-        if (soundOn)
-        {
-            PlayerPrefs.SetInt("sounds", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("sounds", 0);
-        }
-        if (hardcoreOn)
-        {
-            PlayerPrefs.SetInt("hardcore", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("hardcore", 0);
-        }
-        PlayerPrefs.SetInt("language", GetLocale());
-    }
-    public void LoadGame()
+    public void LoadData()
     {
         if (PlayerPrefs.HasKey("music"))
         {
@@ -280,14 +195,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            if (soundOn)
-            {
-                PlayerPrefs.SetInt("music", 1);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("music", 0);
-            }
+            PlayerPrefs.SetInt("music", 1);
+            musicOn = true;
         }
         //-----------------------------------------------
         if (PlayerPrefs.HasKey("sounds"))
@@ -303,14 +212,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            if (soundOn)
-            {
-                PlayerPrefs.SetInt("sounds", 1);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("sounds", 0);
-            }
+            PlayerPrefs.SetInt("sounds", 1);
+            soundOn = true;
         }
         //-----------------------------------------------
         if (PlayerPrefs.HasKey("hardcore"))
@@ -326,14 +229,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            if (hardcoreOn)
-            {
-                PlayerPrefs.SetInt("hardcore", 1);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("hardcore", 0);
-            }
+            PlayerPrefs.SetInt("hardcore", 0);
+            hardcoreOn = false;
         }
         //-----------------------------------------------
         if (PlayerPrefs.HasKey("language"))
@@ -373,71 +270,38 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ChangeLanguage(string locale)
-    {
-        if (locale == "english")
-        {
-            SetLocale(0);
-        }
-        if (locale == "french")
-        {
-            SetLocale(1);
-        }
-        if (locale == "german")
-        {
-            SetLocale(2);
-        }
-        if (locale == "polish")
-        {
-            SetLocale(3);
-        }
-        if (locale == "portuguese")
-        {
-            SetLocale(4);
-        }
-        if (locale == "russian")
-        {
-            SetLocale(5);
-        }
-        if (locale == "spanish")
-        {
-            SetLocale(6);
-        }
-    }
-
-    public void SetLocale(int localeId)
-    {
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
-    }
-
     public int GetLocale()
     {
         return LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
     }
 
-    public void PlayButton()
+    public void ButtonNewRun()
     {
-        PlayerPrefs.SetInt("currentlevel", 0);
-        PlayerPrefs.SetFloat("currenttimer", 0);
-        rotationController.SetLevel(0);
-        mainMenu.SetActive(false);
-        Time.timeScale = 1;
+        ClearProgress();
+        ResetLevelsAndPlayer();
+        MenuToGame();
     }
 
-    public void ContinueButton()
+    public void ButtonContinue()
     {
-        rotationController.SetLevel(PlayerPrefs.GetInt("currentlevel"));
-        timer = PlayerPrefs.GetFloat("currenttimer");
-        mainMenu.SetActive(false);
-        Time.timeScale = 1;
+        ResetLevelsAndPlayer();
+        rotationController.SetLevel(currentRunLevel);
+        timer = currentRunTimer;
+        MenuToGame();
     }
 
     public void ToggleHardcore()
     {
         hardcoreOn = !hardcoreOn;
-        
-        UpdateOptionsUI();
-        SaveGame();
+        if (hardcoreOn)
+        {
+            PlayerPrefs.SetInt("hardcore", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("hardcore", 0);
+        }
+        UpdateUI();
     }
 
     public void ToggleMusic()
@@ -447,22 +311,31 @@ public class GameController : MonoBehaviour
         {
             music.time = 2;
             music.Play();
+            PlayerPrefs.SetInt("music", 1);
         }
         else
         {
             music.Stop();
+            PlayerPrefs.SetInt("music", 0);
         }
-        UpdateOptionsUI();
-        SaveGame();
+        UpdateUI();
     }
+
     public void ToggleSounds()
     {
         soundOn = !soundOn;
-        UpdateOptionsUI();
-        SaveGame();
+        if (soundOn)
+        {
+            PlayerPrefs.SetInt("sounds", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("sounds", 0);
+        }
+        UpdateUI();
     }
 
-    public void UpdateOptionsUI()
+    public void UpdateUI()
     {
         OptMusicOn.gameObject.SetActive(musicOn);
         OptMusicOff.gameObject.SetActive(!musicOn);
@@ -504,6 +377,81 @@ public class GameController : MonoBehaviour
             buttonContinue.SetActive(true);
         }
     }
+    
+    public void ButtonRestart()
+    {
+        ClearProgress();
+        ResetLevelsAndPlayer();
+        PauseToGame();
+    }
+
+    public void MenuToGame()
+    {
+        mainMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void PauseToGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void GameToMenu()
+    {
+        UpdateUI();
+        mainMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+    
+    public void GameToPause()
+    {
+        UpdateUI();
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void PauseToMenu()
+    {
+        UpdateUI();
+        pauseMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+
+    public void SetLocale(int localeId)
+    {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+    }
+
+    public void NextLevel()
+    {
+        if (level < levels.Count - 1)                                                           // No more levels - Crash detection
+        {
+            if (soundOn){nextLevelSound.Play();}                                                // Plays next level sound effect
+            rotationController.moveDirection = RotationController.MoveDirections.NextLevel;     // Tells the RC to move to the next level
+            rotationController.moveQueued = true;                                               // Starts the RC move process
+        } else { }                                                                              // No more levels - Crash detection
+    }
+
+    public void SaveProgress()
+    {
+        if (level > maxLevel)                                                                   // If the player reaches a new highest level, stores it in the prefs
+        {
+            maxLevel = level;
+            PlayerPrefs.SetInt("maxlevel", level);
+        }
+        if (!hardcoreOn)
+        {
+            currentRunLevel = level;
+            currentRunTimer = timer;
+            PlayerPrefs.SetInt("currentlevel", level);
+            PlayerPrefs.SetFloat("currenttimer", timer);
+        }
+        else
+        {
+            ClearProgress();
+        }
+    }
 
     public void ToggleLanguage()
     {
@@ -518,61 +466,45 @@ public class GameController : MonoBehaviour
         }
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i];
 
-        SaveGame();
+        PlayerPrefs.SetInt("language", GetLocale());
     }
 
+    public void ClearProgress()
+    {
+        currentRunTimer = 0;
+        currentRunLevel = 0;
+        PlayerPrefs.SetFloat("currenttimer", 0);
+        PlayerPrefs.SetInt("currentlevel", 0);
+    }
+
+    public void Hover()
+    {
+        selectable.Select();
+    }
+    
     public void QuitGame()
     {
         #if UNITY_STANDALONE
-            Application.Quit();
+                Application.Quit();
         #endif
         #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+                UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 
     public void PauseMenu()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0;
+        GameToPause();
     }
+    
     public void Resume()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
+        PauseToGame();
     }
-
-    public void Restart()
-    {
-        level = 0;
-        allLevels.transform.position = new Vector3();
-        ResetLevel();
-        SetCubeControl();
-        timer = 0;
-        currentRunLevel = 0;
-        currentRunTimer = 0;
-        PlayerPrefs.SetFloat("currenttimer", 0);
-        PlayerPrefs.SetInt("currentlevel", 0);
-        UpdateOptionsUI();
-        Resume();
-    }
-
+    
     public void MainMenu()
     {
-        PlayerPrefs.SetFloat("currenttimer", timer);
-        level = 0;
-        timer = 0;
-        ResetLevel();
-        UpdateOptionsUI();
-        pauseMenu.SetActive(false);
-        mainMenu.SetActive(true);
+        ResetLevelsAndPlayer();
+        PauseToMenu();
     }
-
-    [SerializeField]
-    private Selectable selectable = null;
-    public void Hover()
-    {
-        selectable.Select();
-    }
-
 }

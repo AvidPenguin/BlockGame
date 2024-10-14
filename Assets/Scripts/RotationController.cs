@@ -44,6 +44,7 @@ public class RotationController : MonoBehaviour
     {
         if (moveQueued)
         {
+            gc.playerController.gameObject.SetActive(false);
             if (moveDirection == MoveDirections.NextLevel)
             {
                 isMoving = true;
@@ -52,11 +53,14 @@ public class RotationController : MonoBehaviour
 
                 if (moveProgress == (50))
                 {
+                    gc.level++;
                     moveQueued = false;
                     moveProgress = 0;
                     isMoving = false;
                     gc.playerController.transform.position = new Vector3(0, 5f, 0);      //Sets new position to player
                     gc.playerController.gameObject.SetActive(true);                     //Reinstates the player to view
+                    gc.cube = gc.levels[gc.level];
+                    gc.SaveProgress();
                 }
             }
             if (moveDirection == MoveDirections.PreviousLevel)
@@ -67,11 +71,13 @@ public class RotationController : MonoBehaviour
 
                 if (moveProgress == (50))
                 {
+                    gc.level--;
                     moveQueued = false;
                     moveProgress = 0;
                     isMoving = false;
                     gc.playerController.transform.position = new Vector3(0, 5f, 0);      //Sets new position to player
                     gc.playerController.gameObject.SetActive(true);                     //Reinstates the player to view
+                    gc.cube = gc.levels[gc.level];
                 }
             }
         }
@@ -188,6 +194,7 @@ public class RotationController : MonoBehaviour
         temp.x = -(i * 50);
         gc.allLevels.transform.position = temp;
         gc.level = i;
-        gc.SetCubeControl();
+        gc.cube = gc.levels[gc.level];
+        
     }
 }

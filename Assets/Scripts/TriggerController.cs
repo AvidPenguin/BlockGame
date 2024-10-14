@@ -79,12 +79,6 @@ public class TriggerController : MonoBehaviour
                         UnityEditor.EditorApplication.isPlaying = false;
             #endif
         }
-        if (optionToggle)
-        {
-            GameController gc = FindAnyObjectByType<GameController>();
-            gc.OptionChange(option);
-
-        }
         if(playSound)
         {
             GameController gc = FindAnyObjectByType<GameController>();

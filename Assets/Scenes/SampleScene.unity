@@ -23613,6 +23613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f172ef665433524bacac5034982405c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   playerController: {fileID: 1894983747}
   rotationController: {fileID: 1654705340}
   mainMenu: {fileID: 2127963616}
@@ -23687,7 +23688,6 @@ MonoBehaviour:
   nextLevelSound: {fileID: 1939154237}
   currentRunLevel: 0
   currentRunTimer: 0
-  selectable: {fileID: 0}
 --- !u!4 &890546011
 Transform:
   m_ObjectHideFlags: 0
@@ -53440,7 +53440,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 890546010}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: PlayButton
+        m_MethodName: ButtonNewRun
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
